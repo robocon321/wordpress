@@ -1704,3 +1704,10 @@ a.list-group-item h5{
 .c-red {
     color: red;
 }
+
+.table__worktime th, .table__worktime td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+  }
