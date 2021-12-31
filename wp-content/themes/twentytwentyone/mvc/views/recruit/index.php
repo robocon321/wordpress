@@ -1,34 +1,49 @@
+<div class="modal fade bd-example-modal-sm" id="modelSuccess" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content d-flex flex-row align-items-center p-4">
+        <img class="mr-1" src="<?php echo(get_template_directory_uri().'/upload/yes-icon.png'); ?>" style="width: 50px; height:50px" alt="Not found" /> <h1 class="m-0" style="display: inline-block;">Thành công</h1>
+    </div>
+  </div>
+</div>
+<div class="modal fade bd-example-modal-sm" id="modelFail" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content d-flex flex-row align-items-center p-4">
+     <img class="mr-1" src="<?php echo(get_template_directory_uri().'/upload/close-icon.png'); ?>" style="width: 50px; height:50px" alt="Not found" /> <h1 class="m-0" style="display: inline-block;">Thất bại</h1>
+    </div>
+  </div>
+</div>
+
 <div class="container">
 <form id="form-recruit">
   <div class="form-group">
     <label for="name">Tên</label>
-    <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Nhập tên của bạn" name="name" >
+    <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Nhập tên của bạn" name="name" required >
   </div>
   <div class="form-group">
     <label for="email">Date</label>
-    <input type="date" class="form-control" id="date" placeholder="Chọn ngày sinh của bạn" name="birthday" />
+    <input type="date" class="form-control" id="date" placeholder="Chọn ngày sinh của bạn" name="birthday" required />
   </div>
   <div class="form-group">
     <label for="email">Email</label>
-    <input type="email" class="form-control" id="email" placeholder="Nhập email của bạn" name="email" />
+    <input type="email" class="form-control" id="email" placeholder="Nhập email của bạn" name="email" required />
   </div>
   <div class="form-group">
     <label for="phone">Số điện thoại</label>
-    <input type="phone" class="form-control" id="phone" placeholder="Nhập số điện thoại của bạn" name="phone" />
+    <input type="phone" class="form-control" id="phone" placeholder="Nhập số điện thoại của bạn" name="phone" required />
   </div>
   <div class="form-group">
     <label for="province">Chọn tỉnh hiện tại</label>
-    <select class="form-control" name="province" id="province">
+    <select class="form-control" name="province" id="province" required>
     </select>
   </div>
   <div class="form-group">
     <label for="district">Chọn quận, huyện hiện tại</label>
-    <select class="form-control" name="district" id="district">
+    <select class="form-control" name="district" id="district" required>
     </select>
   </div>
   <div class="form-group">
     <label for="academic-level">Trình độ học vấn</label>
-    <select class="form-control" name="academic-level" id="academic-level">
+    <select class="form-control" name="academic-level" id="academic-level" required>
       <option value="0">Tiểu học</option>
       <option value="1">THCS</option>
       <option value="2">THPT</option>
@@ -211,7 +226,12 @@ $("#form-recruit").submit(function(e) {
       data: form.serialize(), // serializes the form's elements.
       success: function(data)
       {
-          console.log(data); // show response from the php script.
+        var dataJson = JSON.parse(data);
+        if(dataJson.success) {
+            $('#modelSuccess').modal('show');
+        }
+        else $('#modelFail').modal('show');
+          
       }
     });
 });
