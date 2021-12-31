@@ -231,7 +231,6 @@ $("#form-recruit").submit(function(e) {
             $('#modelSuccess').modal('show');
         }
         else $('#modelFail').modal('show');
-          
       }
     });
 });

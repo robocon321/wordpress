@@ -47,6 +47,9 @@
         case 'recruit':
           $controller = 'RecruitController';
           break;
+        case 'search':
+          $controller = 'SearchController';
+          break;
         default:
           $controller = 'HomeController';
           break;

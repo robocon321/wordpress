@@ -219,9 +219,12 @@ function getChildrenComments($arr, $id, $name) {
             <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                 <div class="sidebar">
                     <div class="widget">
-                        <h2>Tìm kiếm</h2>
-                        <form class="search">
-                            <input type="text" class="input__search"/>
+                        <form method = "GET" action="/wordpress/search/" >
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Tìm kiếm</label>
+                                <input type="text" class="form-control" aria-describedby="emailHelp" name="q"/>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Search</button>
                         </form>
                     </div><!-- end widget -->
 
