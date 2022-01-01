@@ -1,3 +1,34 @@
+<div class="modal fade bd-example-modal-sm" id="modelSuccess" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" style="max-width: 1500px">
+    <div class="modal-content p-4">
+        <div class="mb-2" style="width: 100%"><img class="mr-1" src="<?php echo(get_template_directory_uri().'/upload/yes-icon.png'); ?>" style="width: 50px; height:50px" alt="Not found" /> <h1 class="m-0" style="display: inline-block;">Thành công</h1></div>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Số điện thoại</th>
+                    <th scope="col">Tên dịch vụ</th>
+                    <th scope="col">Giá dịch vụ</th>
+                    <th scope="col">Trạng thái</th>
+                    <th scope="col">Tên KTV</th>
+                    <th scope="col">Điện thoại KTV</th>
+                    <th scope="col">Ngày</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+            </tbody>
+        </table>
+    </div>
+  </div>
+</div>
+<div class="modal fade bd-example-modal-sm" id="modelFail" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" style="max-width: 800px">
+    <div class="modal-content d-flex flex-row align-items-center p-4">
+     <img class="mr-3" src="<?php echo(get_template_directory_uri().'/upload/close-icon.png'); ?>" style="width: 50px; height:50px" alt="Not found" /> <h1 class="m-0" style="display: inline-block;">Bạn chưa từng sử dụng dịch vụ chúng tôi</h1>
+    </div>
+  </div>
+</div>
+
 <section>
     <div class="container mb-3">
         <div class="row">
@@ -282,8 +313,77 @@
                         </div>
                     </div><!-- end widget -->
 
+                    <div class="widget">
+                        <form id="lookupForm">
+                            <div class="form-group">
+                                <label for="lookup">Tra cứu dịch vụ đã sử dụng</label>
+                                <input type="text" pattern="^([0-9]{10})" max="10" id="lookup" class="form-control" name="lookup" placeholder="Nhập số điện thoại của bạn" />
+                            </div>
+                            <button type="submit" class="btn btn-primary">Tra cứu</button>
+                        </form>
+                    </div><!-- end widget -->
+
                 </div><!-- end sidebar -->
             </div><!-- end col -->
         </div><!-- end row -->
     </div><!-- end container -->
 </section>
+
+<script>
+    const tbody = document.getElementById('tbody');
+
+    function createTdElement(content) {
+        var td = document.createElement("td");
+        td.textContent = content;
+        return td;
+    }
+
+    $("#lookupForm").submit(function(e) {
+
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+
+        var form = $("#lookupForm");
+        $.ajax({
+            type: "POST",
+            url: "<?php echo(get_template_directory_uri()."/mvc/ajax/lookup-order.php") ?>",
+            data: $(form).serialize(), // serializes the form's elements.
+            success: function(data)
+            {
+                console.log(data);
+                data = JSON.parse(data);
+                if(data.is_success) {
+                    tbody.innerHTML = null;
+                    data.orders.forEach((item, index) => {
+                        var tr = document.createElement("tr");
+
+                        var tdOrder = createTdElement(index);
+                        var tdPhone = createTdElement(item.phone);
+                        var tdServiceName = createTdElement(item.title);
+                        var tdPrice = createTdElement(item.price);
+                        var tdStatus = createTdElement(item.is_success == 1 ? 'Thành công' : 'Thất bại');
+                        var tdNameKTV = createTdElement(item.name);
+                        var tdPhoneKTV = createTdElement(item.phone_employee);
+                        var date = new Date(item.cre_time);
+                        var tdDate = createTdElement(date.getDate() + "/" + (date.getMonth() + 1) + "/" + (date.getFullYear()));
+
+                        tr.appendChild(tdOrder);
+                        tr.appendChild(tdPhone);
+                        tr.appendChild(tdServiceName);
+                        tr.appendChild(tdPrice);
+                        tr.appendChild(tdStatus);
+                        tr.appendChild(tdNameKTV);
+                        tr.appendChild(tdPhoneKTV);
+                        tr.appendChild(tdDate);
+
+                        tbody.appendChild(tr);
+
+                    });
+                    $('#modelSuccess').modal('show');
+                }
+                else $('#modelFail').modal('show');
+            }
+        });
+    });
+</script>
+
+
