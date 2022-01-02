@@ -17,16 +17,18 @@
       $this -> method = $_SERVER['REQUEST_METHOD'];
 
       // params
-      if(count($processUrl)) {
-        $cast = (int) $processUrl[0];
-        $this -> params['route'] = $processUrl[0];
-      }
+      // if(count($processUrl)) {
+      //   $cast = (int) $processUrl[0];
+      //   $this -> params['route'] = $processUrl[0];
+      // }
 
       $this -> processController();
     }
 
     public function processURL() {
-      return isset($_SERVER['REDIRECT_URL']) ? explode('/', filter_var(trim($_SERVER['REDIRECT_URL'], '/'))) : [];
+      if(isset($_SERVER['REQUEST_URI'])) return explode('/', filter_var(trim($_SERVER['REQUEST_URI'], '/')));
+      if(isset($_SERVER['REDIRECT_URL'])) return explode('/', filter_var(trim($_SERVER['REDIRECT_URL'], '/')));
+      return [];
     }
 
     public function processController() {
@@ -49,6 +51,9 @@
           break;
         case 'search':
           $controller = 'SearchController';
+          break;
+        case 'wp-admin':
+          $controller = 'AdminController';
           break;
         default:
           $controller = 'HomeController';
@@ -74,7 +79,7 @@
       } 
 
       // call controller
-      if($this -> method === 'GET') {
+      if($this -> method === 'GET' && $this -> controller !== 'wp-admin') {
         get_header();
       ?>
       <main>
@@ -82,8 +87,10 @@
       </main>
       <?php
         get_footer();
+      } else if($this -> method === 'GET' && $this -> controller === 'wp-admin') {
+          $controller -> doController($this -> params);
       } else {
-        $controller -> doPost($this -> params);
+          $controller -> doPost($this -> params);
       }
     }
   }
