@@ -3,7 +3,11 @@
 
     public function doGet($params = null) {
       if(isset($params['id'])) {
-        echo("Hello world");
+        $data = [];
+        $service = $this -> service("EmployeeDetailAdminService");
+        $data['employee'] = $service -> getEmployee($params['id']);
+        $data['orders'] = $service -> getOrders($params['id']);
+        $this -> view("employee-detail-admin", $data);
       } else {
         $data = [];
         $service = $this -> service("EmployeeAdminService");

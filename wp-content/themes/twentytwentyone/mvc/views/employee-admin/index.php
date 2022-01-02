@@ -13,7 +13,6 @@
     <a href="http://localhost/wordpress/recruit/" class="page-title-action">Add New</a>
     <hr class="wp-header-end">
 
-
     <form id="posts-filter" method="get">
       <div class="tablenav top">
 
@@ -57,7 +56,7 @@
             <td class="column-primary">
               <div class="locked-info"><span class="locked-avatar"></span> <span class="locked-text"></span></div>
               <strong><a href="http://localhost/wordpress/wp-admin/post.php?post=1&amp;action=edit"><?php echo($row['name'])?></a></strong>
-              <div class="row-actions"><span class="edit"><a href="http://localhost/wordpress/wp-admin/post.php?post=1&amp;action=edit" aria-label="Edit “Hello world!”">Edit</a> | </span><span class="trash"><a href="http://localhost/wordpress/wp-admin/post.php?post=1&amp;action=trash&amp;_wpnonce=1179e24bfc" class="submitdelete" aria-label="Move “Hello world!” to the Trash">Trash</a> </span></div><button type="button" class="toggle-row"></button>
+              <div class="row-actions"><span class="edit"><a href="http://localhost/wordpress/wp-admin/admin.php?page=employees&id=<?php echo($row['id'])?>" aria-label="Edit “Hello world!”">Edit</a> | </span><span class="trash"><a href="http://localhost/wordpress/wp-admin/post.php?post=1&amp;action=trash&amp;_wpnonce=1179e24bfc" class="submitdelete" aria-label="Move “Hello world!” to the Trash">Trash</a> </span></div><button type="button" class="toggle-row"></button>
             </td>
             <td><a href="edit.php?post_type=post&amp;author=1"><?php echo($row['email'])?></a></td>
             <td><span aria-hidden="true"><?php echo($row['phone'])?></span></td>

@@ -11,7 +11,7 @@
     }
 
     public function getEmployeeSumary($search = '', $offset = 0, $limit = 10, $sortby = 'name', $isASC = true, $conditions = []) {
-      $query = "SELECT ME.name name, ME.email email, ME.phone phone, ME.province province, ME.status status, ME.district district , COUNT(MO.service_id) total, 
+      $query = "SELECT ME.id, ME.name name, ME.email email, ME.phone phone, ME.province province, ME.status status, ME.district district , COUNT(MO.service_id) total, 
       (
           SELECT COUNT(id) FROM my_orders WHERE is_success = 1 AND employee_id = MO.employee_id
       ) success_true
@@ -58,6 +58,27 @@
 
       return $result;
     }
+
+    public function getEmployee($id = 0) {
+      if($id == 0) return null;
+      else {
+        $query = "SELECT * FROM my_employees WHERE id = ".$id;
+        return mysqli_query($this -> conn, $query);
+      }
+    }
+
+    public function updateEmployee($id = 0, $fields = []) {
+      if($id == 0 || !isset($fields)) return 0;
+      else {
+        $query = "UPDATE my_employees SET ";
+        foreach($fields as $key => $value) {
+          $query = $query.$key." = '".$value."', ";
+        }
+        $query = substr($query, 0, -2);
+        $query = $query." WHERE id = ".$id;
+        return mysqli_query($this -> conn, $query);
+      }
+    } 
   }
 
   

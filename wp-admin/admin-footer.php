@@ -1,3 +1,7 @@
+<script src="<?php echo(get_template_directory_uri().'/js/jquery.min.js'); ?>"></script>
+<script src="<?php echo(get_template_directory_uri().'/js/tether.min.js'); ?>"></script>
+<script src="<?php echo(get_template_directory_uri().'/js/bootstrap.min.js'); ?>"></script>
+<script src="<?php echo(get_template_directory_uri().'/js/custom.js'); ?>"></script>
 <?php
 /**
  * WordPress Administration Template Footer
