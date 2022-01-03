@@ -15,14 +15,28 @@ function employee_add_admin_page() {
   'Employees', 
   'manage_options', 
   'employees', 
-  'employee_theme_create_page',
-  '', 
+  'custom_theme_create_page',
+  get_template_directory_uri().'/icons/employee.png', 
   110);
 }
 
 add_action('admin_menu', 'employee_add_admin_page');
 
-function employee_theme_create_page() {
+// manage service
+function service_add_admin_page() {
+  add_menu_page(
+  'Service Theme Options', 
+  'Services', 
+  'manage_options', 
+  'services', 
+  'custom_theme_create_page',
+  get_template_directory_uri().'/icons/service.png', 
+  111);
+}
+
+add_action('admin_menu', 'service_add_admin_page');
+
+function custom_theme_create_page() {
   require_once("mvc/Bridge.php");
   new App();
 }

@@ -51,5 +51,52 @@
 
       return mysqli_query($this -> conn, $query);    
     }
+
+    public function getServiceSumary($search = '', $offset = 0, $limit = 10, $sortby = 'name', $isASC = true, $conditions = []) {
+      $query = "SELECT WU.user_nicename name, WU.user_email email ,MS.id, MS.title, MS.price, MS.view_count, MS.mod_time, COUNT(*) count FROM 
+      my_services MS LEFT JOIN my_orders MO ON MS.id = MO.service_id JOIN wp_users WU ON MS.author_id = WU.ID";
+
+      $query = $query." WHERE MS.title LIKE '%".$search."%' ";
+
+      if(isset($conditions)) {
+        foreach ($conditions as $key => $value) {
+          $query = $query." AND ".$key."=".$value." ";
+        }
+      }
+
+      $query = $query." GROUP BY MO.service_id ";
+      if(isset($sortby)) {
+        $query = $query."ORDER BY ".$sortby." ";
+        if(isset($isASC)) $query = $query."ASC ";
+        else $query = $query."DESC ";
+      }
+
+      if(isset($limit)) {
+        if(isset($offset)) $query = $query."LIMIT ".$offset.", ".$limit." ";
+        else $query = $query."LIMIT ".$limit;
+      }
+
+      return mysqli_query($this -> conn, $query);
+    }
+
+    public function getTotalService($search = '', $conditions = []) {
+      $query = "SELECT COUNT(*) count FROM my_services WHERE 1 ";
+      $query = $query. "AND title LIKE '%".$search."%' ";
+      
+      if(isset($conditions)) {
+        foreach ($conditions as $key => $value) {
+          $query = $query." AND ".$key."=".$value." ";
+        }
+      }
+
+      $result = 0;
+      while($row = mysqli_fetch_array(mysqli_query($this -> conn, $query))) {
+        $result = $row['count'];
+        break;
+      }
+
+      return $result;
+    }
+
   }
 ?>

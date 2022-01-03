@@ -5,6 +5,9 @@
       $route = $params['page'];
       $controller = 'EmployeeAdminController';
       switch($route) {
+        case 'services':
+          $controller = 'ServiceAdminController';
+          break;
         default :
         break;
       }

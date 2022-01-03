@@ -17,7 +17,7 @@
       ) success_true
       FROM my_employees ME LEFT JOIN my_orders MO ON ME.id = MO.employee_id ";
 
-      $query = $query." WHERE ME.name LIKE '%".$search."' ";
+      $query = $query." WHERE ME.name LIKE '%".$search."%' ";
 
       if(isset($conditions)) {
         foreach ($conditions as $key => $value) {
