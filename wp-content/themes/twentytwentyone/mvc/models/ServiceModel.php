@@ -1,4 +1,6 @@
 <?php 
+  require_once(__DIR__.'/../core/Database.php');
+
   class ServiceModel extends Database {    
     public function getServices($offset = null, $limit = null, $search = null, $sortby = null, $isASC = true, $conditions = []) {
       $query = "SELECT * FROM my_services WHERE 1 ";
@@ -96,6 +98,16 @@
       }
 
       return $result;
+    }
+
+    public function insertService($values) {
+      $cre_time = date('Y-m-d');
+      $mod_time = $cre_time;
+      $view_count = 0;
+      $order_count = 0;
+
+      $query = "INSERT INTO my_services VALUES('', '".$values['title']."', ".$values['author_id'].", '".$values['content']."', '".$values['thumbnail']."', '".$values['price']."', ".$view_count.", ".$order_count.", '".$cre_time."', '".$mod_time."')";
+      return mysqli_query($this -> conn, $query);
     }
 
   }

@@ -10,7 +10,7 @@
   <div class="wrap">
     <h1 class="wp-heading-inline"> Services</h1>
 
-    <a href="http://localhost/wordpress/recruit/" class="page-title-action">Add New</a>
+    <a href="?page=services&action=new" class="page-title-action">Add New</a>
     <hr class="wp-header-end">
 
     <form id="posts-filter" method="get">
@@ -44,6 +44,7 @@
             <th scope="col" id="count" class="manage-column column-title column-primary sorted <?php echo(isset($_GET['sort']) && $_GET['sort'] == 'count' ? 'asc' : 'desc')?>"><a href="?page=services&sort=count"><span>Lượt sử dụng</span><span class="sorting-indicator"></span></a></th>
             <th scope="col" id="name" class="manage-column column-title column-primary sorted <?php echo(isset($_GET['sort']) && $_GET['sort'] == 'name' ? 'asc' : 'desc')?>"><a href="?page=services&sort=name"><span>Tên tác giả</span><span class="sorting-indicator"></span></a></th>
             <th scope="col" id="email" class="manage-column column-title column-primary sorted <?php echo(isset($_GET['sort']) && $_GET['sort'] == 'email' ? 'asc' : 'desc')?>"><a href="?page=services&sort=email"><span>Liên lạc</span><span class="sorting-indicator"></span></a></th>
+            <th scope="col" id="mod-time" class="manage-column column-title column-primary sorted <?php echo(isset($_GET['sort']) && $_GET['sort'] == 'mod_time' ? 'asc' : 'desc')?>"><a href="?page=services&sort=mod_time"><span>Ngày thêm vào</span><span class="sorting-indicator"></span></a></th>
           </tr>
         </thead>
 
@@ -63,6 +64,7 @@
             <td><span aria-hidden="true"><?php  echo($row['count'])?></span></td>
             <td><span aria-hidden="true"><?php  echo($row['name'])?></span></td>
             <td><span aria-hidden="true"><?php  echo($row['email'])?></span></td>
+            <td><span aria-hidden="true"><?php  echo($row['mod_time'])?></span></td>
           </tr>
         <?php } ?>
         </tbody>
