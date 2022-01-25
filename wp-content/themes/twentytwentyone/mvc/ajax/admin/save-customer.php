@@ -22,6 +22,5 @@ if ($_POST['customer_id'] != '') {
   $model->updateCustomer($id, $fields);
 } else {
   //add a new customer
-  $model->insertCustomer($name, $birthday, $email, $phone, $province, $district, $cre_time = '', $mod_time = '');
+  $model->insertCustomer($name, $birthday, $email, $phone, $province, $district, $street, $cre_time = '', $mod_time = '');
 }
-?>

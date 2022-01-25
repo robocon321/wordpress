@@ -33,10 +33,6 @@
             <input type="text" class="form-control" value="<?php echo  isset($customer['name']) ? $customer['name'] : '' ?>" id="name" name="name" required>
         </div>
         <div class="form-group">
-            <label for="birthday">Date</label>
-            <input type="date" class="form-control" value="<?php echo isset($customer['birthday']) ? (substr($customer['birthday'], 0, 10)) : '' ?>" id="birthday" name="birthday" />
-        </div>
-        <div class="form-group">
             <label for="email">Email</label>
             <input type="email" class="form-control" value="<?php echo  isset($customer['email']) ? $customer['email'] : '' ?>" id="email" name="email" />
         </div>
@@ -44,26 +40,28 @@
             <label for="phone">Số điện thoại</label>
             <input type="phone" class="form-control" value="<?php echo isset($customer['phone']) ? $customer['phone'] : '' ?>" id="phone" name="phone" />
         </div>
+        <div class="form-group ">
+            <label for="birthday">Ngày sinh</label>
+            <input type="date" class="form-control" value="<?php echo isset($customer['birthday']) ? (substr($customer['birthday'], 0, 10)) : '' ?>" id="birthday" name="birthday" />
+        </div>
         <label><b>Địa chỉ:</b></label>
-        <div class="form-group">
-            <label for="province">Tỉnh/Thành phố</label>
-            <select class="form-control" name="province" id="province">
-            </select>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="province">Tỉnh/Thành phố</label>
+                <select class="form-control" name="province" id="province">
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="district">Quận/Huyện</label>
+                <select class="form-control" name="district" id="district">
+                </select>
+            </div>
+            <div class="form-group col-md-12">
+                <label for="street">Đường</label>
+                <input type="text" class="form-control" value="<?php echo isset($customer['street']) ? $customer['street'] : '' ?>" name="street" id="street" />
+            </div>
         </div>
-        <div class="form-group">
-            <label for="district">Quận/Huyện</label>
-            <select class="form-control" name="district" id="district">
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="street">Đường</label>
-            <input type="text" class="form-control" value="<?php echo isset($customer['street']) ? $customer['street'] : '' ?>" name="street" id="street" />
-        </div>
-
         <button class="btn btn-primary" id="btn_save">Cập nhật</button>
-
-
-
     </form>
     <script>
         var selectedProvince = "<?php echo isset($customer['district']) ? $customer['district'] : 'null' ?>";

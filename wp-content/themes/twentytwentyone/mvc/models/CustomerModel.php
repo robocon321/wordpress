@@ -23,8 +23,6 @@ class CustomerModel extends Database
     $mod_time = $cre_time;
     $province = ($province != '') ? $province : '-1';
     $district = ($district != '') ? $district : '-1';
-    //INSERT INTO `my_customers` (`id`, `name`, `phone`, `email`, `birthday`, `province`, `district`, `street`, `cre_time`, `mod_time`) 
-    //VALUES ('0', 'k', NULL, NULL, '2022-01-25 09:33:17.000000', NULL, NULL, '', current_timestamp(), current_timestamp());
     $query = "INSERT INTO `my_customers` (`id`, `name`, `phone`, `email`, `birthday`, `province`, `district`, `street`,`cre_time`, `mod_time`)" .
       " VALUES(0, '" . $name . "', '" . $phone . "', '" . $email . "', '" . $birthday . "', '" . $province . "', '" . $district . "',  '" . $street . "', '" . $cre_time . "', '" . $mod_time . "')";
     if (mysqli_query($this->conn, $query)) return $this->conn->insert_id;
@@ -73,8 +71,7 @@ class CustomerModel extends Database
     $query = "SELECT MC.id, MC.name, MC.email email, MC.phone phone, MC.province , 
     MC.district, MC.street
     FROM my_customers MC ";
-
-
+    
     $query = $query . " WHERE MC.name LIKE '%" . $search . "%' ";
 
     if (isset($conditions)) {

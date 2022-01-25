@@ -55,7 +55,7 @@ else $page = $_GET['pg'];
             <tr class="iedit author-self level-0 post-1 type-post status-publish format-standard hentry " id="row_id<?php echo ($row['id']) ?>">
               <td class="column-primary">
                 <div class="locked-info"><span class="locked-avatar"></span> <span class="locked-text"></span></div>
-                <strong><a href="?page=customers&amp;action=edit"><?php echo ($row['name']) ?></a></strong>
+                <strong><a href="?page=customers&id=<?php echo ($row['id']) ?>"><?php echo ($row['name']) ?></a></strong>
                 <div class="row-actions">
                   <span class="edit">
                     <a href="?page=customers&id=<?php echo ($row['id']) ?>">Edit</a> |
