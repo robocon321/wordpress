@@ -36,6 +36,20 @@ function service_add_admin_page() {
 
 add_action('admin_menu', 'service_add_admin_page');
 
+// manage customer
+function customer_add_admin_page() {
+  add_menu_page(
+  'Service Theme Options', 
+  'Customers', 
+  'manage_options', 
+  'customers', 
+  'custom_theme_create_page',
+  get_template_directory_uri().'/icons/customer.png', 
+  112);
+}
+
+add_action('admin_menu', 'customer_add_admin_page');
+
 function custom_theme_create_page() {
   require_once("mvc/Bridge.php");
   new App();
