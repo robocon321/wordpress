@@ -56,7 +56,7 @@
           <tr class="iedit author-self level-0 post-1 type-post status-publish format-standard hentry">
             <td class="column-primary">
               <div class="locked-info"><span class="locked-avatar"></span> <span class="locked-text"></span></div>
-              <strong><a href="http://localhost/wordpress/wp-admin/post.php?post=1&amp;action=edit"><?php echo($row['title'])?></a></strong>
+              <strong><a href="http://localhost/wordpress/wp-admin/admin.php?page=services&id=<?php echo($row['id'])?>"><?php echo($row['title'])?></a></strong>
               <div class="row-actions"><span class="edit"><a href="http://localhost/wordpress/wp-admin/admin.php?page=services&id=<?php echo($row['id'])?>" aria-label="Edit “Hello world!”">Edit</a> | </span><span class="trash"><a href="http://localhost/wordpress/wp-admin/post.php?post=1&amp;action=trash&amp;_wpnonce=1179e24bfc" class="submitdelete" aria-label="Move “Hello world!” to the Trash">Trash</a> </span></div><button type="button" class="toggle-row"></button>
             </td>
             <td><span aria-hidden="true"><?php echo($row['price'])?></span></td>

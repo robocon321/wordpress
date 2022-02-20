@@ -6,11 +6,14 @@
         $this -> view('service-new-admin');
       } else {
         if(isset($params['id'])) {
-          // $data = [];
-          // $service = $this -> service("EmployeeDetailAdminService");
-          // $data['employee'] = $service -> getEmployee($params['id']);
-          // $data['orders'] = $service -> getOrders($params['id']);
-          // $this -> view("employee-detail-admin", $data);
+          $data = [];
+          $service = $this -> service("ServiceDetailAdminService");
+          $data['service'] = $service -> getService($params['id']);
+          $data['total-order'] = $service -> getTotalOrder($params['id']);
+          $data['tags'] = $service -> getTags($params['id']);
+          $data['author'] = $service -> getAuthor($params['id']);
+          
+          $this -> view("service-detail-admin", $data);
         } else {
           $data = [];
           $service = $this -> service("ServiceAdminService");

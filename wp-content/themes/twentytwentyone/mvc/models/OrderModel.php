@@ -26,4 +26,14 @@
 
       return mysqli_query($this -> conn, $query);
     }
+
+    public function getCountOrder($conditions) {
+      $query = "SELECT count(*) FROM my_orders WHERE 1 ";
+      if(isset($conditions)) {
+        foreach ($conditions as $key => $value) {
+          $query = $query." AND ".$key."=".$value." ";
+        }
+      }
+      return mysqli_query($this -> conn, $query);
+    }
   }
