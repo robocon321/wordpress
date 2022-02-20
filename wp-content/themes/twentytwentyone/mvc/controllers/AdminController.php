@@ -8,6 +8,9 @@
         case 'services':
           $controller = 'ServiceAdminController';
           break;
+        case 'customers':
+          $controller = 'CustomerAdminController';
+          break;
         default :
         break;
       }
