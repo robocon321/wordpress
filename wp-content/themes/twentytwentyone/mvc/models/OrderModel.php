@@ -48,8 +48,15 @@ class OrderModel extends Database
       if (isset($isASC)) $query = $query . "ASC ";
       else $query = $query . "DESC ";
     }
+    if (isset($limit)) {
+      if (isset($offset)) $query = $query . "LIMIT " . $offset . ", " . $limit . " ";
+      else $query = $query . "LIMIT " . $limit;
+    }
 
-<<<<<<< HEAD
+    return mysqli_query($this->conn, $query);
+  }
+
+
     public function getCountOrder($conditions) {
       $query = "SELECT count(*) FROM my_orders WHERE 1 ";
       if(isset($conditions)) {
@@ -58,15 +65,5 @@ class OrderModel extends Database
         }
       }
       return mysqli_query($this -> conn, $query);
-    }
+    }      
   }
-=======
-    if (isset($limit)) {
-      if (isset($offset)) $query = $query . "LIMIT " . $offset . ", " . $limit . " ";
-      else $query = $query . "LIMIT " . $limit;
-    }
-
-    return mysqli_query($this->conn, $query);
-  }
-}
->>>>>>> 3494fcd221d1af7773a21df3f870f3b09a069e27

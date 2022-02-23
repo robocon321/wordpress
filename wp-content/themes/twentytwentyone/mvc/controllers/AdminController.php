@@ -11,6 +11,9 @@
         case 'customers':
           $controller = 'CustomerAdminController';
           break;
+        case 'feedbacks':
+          $controller = 'FeedbackAdminController';
+          break;
         default :
         break;
       }

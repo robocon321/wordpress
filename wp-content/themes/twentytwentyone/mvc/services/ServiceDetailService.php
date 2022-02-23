@@ -40,5 +40,6 @@
     public function increaseViewCountService($service_id) {
       return $this -> serviceModel -> updateService(array("id" => $service_id), array("view_count" => "view_count + 1"));
     }
+
    }
 ?>

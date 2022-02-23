@@ -52,6 +52,9 @@
         case 'search':
           $controller = 'SearchController';
           break;
+        case 'about':
+          $controller = 'FeedbackController';
+          break;
         case 'wp-admin':
           $controller = 'AdminController';
           break;

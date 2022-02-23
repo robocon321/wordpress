@@ -142,7 +142,6 @@
                         window.location.replace("http://localhost/wordpress/forums");
                       }, 3000);
                     } else $('#modelFail').modal('show');
-                    console.log(data);
                 }
             });
 

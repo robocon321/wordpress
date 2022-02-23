@@ -7,10 +7,12 @@
   class ServiceDetailAdminService {
     private $serviceModel;
     private $orderModel;
+    private $userModel;
 
     public function __construct() {
       $this -> serviceModel = new ServiceModel();
       $this -> orderModel = new OrderModel();
+      $this -> userModel = new UserModel();
     }
 
     public function getTags($service_id) {
@@ -24,5 +26,9 @@
     public function getTotalOrder($service_id) {
       return $this -> orderModel -> getCountOrder(array('service_id', $service_id));
     }
- }
+
+    public function getAuthor($authod_id) {
+      return $this -> userModel -> getUsers(0, 1, '', null, true, array("id" => $authod_id));
+    }
+  }
 ?>

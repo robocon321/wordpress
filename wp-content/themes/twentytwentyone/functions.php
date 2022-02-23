@@ -39,8 +39,8 @@ add_action('admin_menu', 'service_add_admin_page');
 // manage customer
 function customer_add_admin_page() {
   add_menu_page(
-  'Service Theme Options', 
-  'Customers', 
+  'Customer Theme Options', 
+  'Customer', 
   'manage_options', 
   'customers', 
   'custom_theme_create_page',
@@ -49,6 +49,21 @@ function customer_add_admin_page() {
 }
 
 add_action('admin_menu', 'customer_add_admin_page');
+
+
+// manage feedback
+function feedback_add_admin_page() {
+  add_menu_page(
+  'Feedback Theme Options', 
+  'Feedbacks', 
+  'manage_options', 
+  'feedbacks', 
+  'custom_theme_create_page',
+  get_template_directory_uri().'/icons/feedback.png', 
+  111);
+}
+
+add_action('admin_menu', 'feedback_add_admin_page');
 
 function custom_theme_create_page() {
   require_once("mvc/Bridge.php");
