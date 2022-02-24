@@ -21,10 +21,36 @@
         if(isset($offset)) $query = $query."LIMIT ".$offset.", ".$limit." ";
         else $query = $query."LIMIT ".$limit;
       }
-
       return mysqli_query($this -> conn, $query);
     }
 
+    public function getForum($id = 0) {
+      if($id == 0) return null;
+      else {
+        $query = "SELECT * FROM my_forums WHERE id = ".$id;
+        return mysqli_query($this -> conn, $query);
+      }
+    }
+
+
+    public function getTotalForum($search = '', $conditions = []) {
+      $query = "SELECT COUNT(*) as count FROM my_forums WHERE 1 ";
+      $query = $query. "AND title LIKE '%".$search."%' ";
+      
+      if(isset($conditions)) {
+        foreach ($conditions as $key => $value) {
+          $query = $query." AND ".$key."=".$value." ";
+        }
+      }
+      
+      $result = 0;
+      while($row = mysqli_fetch_array(mysqli_query($this -> conn, $query))) {
+        $result = $row['count'];
+        break;
+      }
+
+      return $result;
+    }
     public function getForumMeta($id = null, $metakey = '') {
       $query = "SELECT * FROM my_forummeta WHERE 1 ";
 
@@ -77,5 +103,9 @@
       }
       $query = substr($query, 0, -1);
       return mysqli_query($this -> conn, $query);
+    }
+
+    public function deleteForum() {
+      return null;
     }
   }

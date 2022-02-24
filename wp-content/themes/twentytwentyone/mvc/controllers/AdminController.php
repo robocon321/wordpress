@@ -14,6 +14,9 @@
         case 'feedbacks':
           $controller = 'FeedbackAdminController';
           break;
+        case 'forums':
+          $controller = 'ForumAdminController';
+          break;
         default :
         break;
       }
