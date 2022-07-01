@@ -65,41 +65,41 @@
             <label for="wt-0"> Sáng thứ 2</label><br>
           </td>
           <td>
-            <input id="wt-3" type="checkbox" class="work-time" value="3">
+            <input id="wt-3" type="checkbox" class="work-time" value="1">
             <label for="wt-3"> Sáng thứ 3</label><br>
           </td>
           <td>
-            <input id="wt-6" type="checkbox" class="work-time" value="6">
+            <input id="wt-6" type="checkbox" class="work-time" value="2">
             <label for="wt-6"> Sáng thứ 4</label><br>
           </td>
           <td>
-            <input id="wt-9" type="checkbox" class="work-time" value="9">
+            <input id="wt-9" type="checkbox" class="work-time" value="3">
             <label for="wt-9"> Sáng thứ 5</label><br>
           </td>
           <td>
-            <input id="wt-12" type="checkbox" class="work-time" value="12">
+            <input id="wt-12" type="checkbox" class="work-time" value="4">
             <label for="wt-12"> Sáng thứ 6</label><br>
           </td>
           <td>
-            <input id="wt-15" type="checkbox" class="work-time" value="15">
+            <input id="wt-15" type="checkbox" class="work-time" value="5">
             <label for="wt-15"> Sáng thứ 7</label><br>
           </td>
           <td>
-            <input id="wt-18" type="checkbox" class="work-time" value="18">
+            <input id="wt-18" type="checkbox" class="work-time" value="6">
             <label for="wt-18"> Sáng chủ nhật</label><br>
           </td>
         </tr>
         <tr>
           <td>
-            <input id="wt-1" type="checkbox" class="work-time" value="1">
+            <input id="wt-1" type="checkbox" class="work-time" value="7">
             <label for="wt-1"> Chiều thứ 2</label><br>
           </td>
           <td>
-            <input id="wt-4" type="checkbox" class="work-time" value="4">
+            <input id="wt-4" type="checkbox" class="work-time" value="8">
             <label for="wt-4"> Chiều thứ 3</label><br>
           </td>
           <td>
-            <input id="wt-7" type="checkbox" class="work-time" value="7">
+            <input id="wt-7" type="checkbox" class="work-time" value="9">
             <label for="wt-7"> Chiều thứ 4</label><br>
           </td>
           <td>
@@ -107,41 +107,41 @@
             <label for="wt-10"> Chiều thứ 5</label><br>
           </td>
           <td>
-            <input id="wt-13" type="checkbox" class="work-time" value="13">
+            <input id="wt-13" type="checkbox" class="work-time" value="11">
             <label for="wt-13"> Chiều thứ 6</label><br>
           </td>
           <td>
-            <input id="wt-16" type="checkbox" class="work-time" value="16">
+            <input id="wt-16" type="checkbox" class="work-time" value="12">
             <label for="wt-16"> Chiều thứ 7</label><br>
           </td>
           <td>
-            <input id="wt-19" type="checkbox" class="work-time" value="19">
+            <input id="wt-19" type="checkbox" class="work-time" value="13">
             <label for="wt-19"> Chiều chủ nhật</label><br>
           </td>
         </tr>
         <tr>
           <td>
-            <input id="wt-2" type="checkbox" class="work-time" value="2">
+            <input id="wt-2" type="checkbox" class="work-time" value="14">
             <label for="wt-2"> Tối thứ 2</label><br>
           </td>
           <td>
-            <input id="wt-5" type="checkbox" class="work-time" value="5">
+            <input id="wt-5" type="checkbox" class="work-time" value="15">
             <label for="wt-5"> Tối thứ 3</label><br>
           </td>
           <td>
-            <input id="wt-8" type="checkbox" class="work-time" value="8">
+            <input id="wt-8" type="checkbox" class="work-time" value="16">
             <label for="wt-8"> Tối thứ 4</label><br>
           </td>
           <td>
-            <input id="wt-11" type="checkbox" class="work-time" value="11">
+            <input id="wt-11" type="checkbox" class="work-time" value="17">
             <label for="wt-11"> Tối thứ 5</label><br>
           </td>
           <td>
-            <input id="wt-14" type="checkbox" class="work-time" value="14">
+            <input id="wt-14" type="checkbox" class="work-time" value="18">
             <label for="wt-14"> Tối thứ 6</label><br>
           </td>
           <td>
-            <input id="wt-17" type="checkbox" class="work-time" value="17">
+            <input id="wt-17" type="checkbox" class="work-time" value="19">
             <label for="wt-17"> Tối thứ 7</label><br>
           </td>
           <td>
