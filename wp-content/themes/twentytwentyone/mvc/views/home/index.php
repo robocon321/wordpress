@@ -79,7 +79,7 @@
                         <div class="shadow-desc">
                             <div class="blog-meta">
                                 <span class="bg-orange"><a href="#" title=""><?php echo($row['name']) ?></a></span>
-                                <h4><a href="?id=<?php echo($row['ID'])?>" title=""><?php echo($row['post_title']) ?></a></h4>
+                                <h4><a href="http://localhost/wordpress/posts/?id=<?php echo($row[0])?>" title=""><?php echo($row['post_title']) ?></a></h4>
                                 <small><a href="#" title=""><?php echo(date_format(date_create($row['post_modified']),"d F Y")) ?></a></small>
                                 <small><a href="#" title="">by <?php echo($row['user_nicename']) ?></a></small>
                             </div><!-- end meta -->
@@ -98,7 +98,7 @@
             <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
                 <div class="page-wrapper">
                     <div class="blog-top clearfix">
-                        <h4 class="pull-left">Bài viết mới nhất <a href="#"><i class="fa fa-rss"></i></a></h4>
+                        <h4 class="pull-left">Bài viết mới nhất <a href="http://localhost/wordpress/posts/?sort=post_date"><i class="fa fa-rss"></i></a></h4>
                     </div><!-- end blog-top -->
 
                     <div class="blog-list clearfix">
@@ -117,7 +117,7 @@
                             </div><!-- end col -->
 
                             <div class="blog-meta big-meta col-md-8">
-                                <h4><a href="tech-single.html" title=""><?php echo($row['post_title'])?></a></h4>
+                                <h4><a href="http://localhost/wordpress/posts/?id=<?php echo($row[0])?>" title=""><?php echo($row['post_title'])?></a></h4>
                                 <p><?php 
                                     $str = $row['post_content'];
                                     $str = preg_replace('/<\w*>/', ' ', $str);
@@ -174,9 +174,8 @@
                                     </a>
                                 </div><!-- end media -->
                             </div><!-- end col -->
-
                             <div class="blog-meta big-meta col-md-8">
-                                <h4><a href="tech-single.html" title=""><?php echo($row['title'])?></a></h4>
+                                <h4><a href="http://localhost/wordpress/services/?id=<?php echo($row['id'])?>" title=""><?php echo($row['title'])?></a></h4>
                                 <p><?php 
                                     $str = $row['content'];
                                     $str = preg_replace('/<\w*>/', ' ', $str);

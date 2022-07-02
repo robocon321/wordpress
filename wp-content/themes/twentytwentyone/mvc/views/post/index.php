@@ -22,11 +22,12 @@
                     <div class="blog-list clearfix">
                     <?php 
                         while($data['posts_filter'] && $row = mysqli_fetch_array($data['posts_filter'])) {
+                        print_r($row);
                     ?>
                         <div class="blog-box row">
                             <div class="col-md-4">
                                 <div class="post-media">
-                                    <a href="?id=<?php echo($row['ID'])?>" title="">
+                                    <a href="?id=<?php echo($row[0])?>" title="">
                                         <img src="<?php echo(get_template_directory_uri().'/upload/tech_blog_01.jpg'); ?>" alt="" class="img-fluid">
                                         <div class="hovereffect"></div>
                                     </a>

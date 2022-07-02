@@ -1,18 +1,45 @@
-<?php 
-    $params = '?';
-    if(isset($_GET['sort'])) $params = $params.'sort='.$_GET['sort'];
-    if(isset($_GET['search'])) $params = '&search='.$_GET['search'];
-    if(!isset($_GET['pg']) || $_GET['pg'] < 2) $page = 2;
-    else $page = $_GET['pg'];
+<?php
+$params = '?';
+if (isset($_GET['sort'])) $params = $params . 'sort=' . $_GET['sort'];
+if (isset($_GET['search'])) $params = '&search=' . $_GET['search'];
+if (!isset($_GET['pg']) || $_GET['pg'] < 2) $page = 2;
+else $page = $_GET['pg'];
 ?>
 <section>
+    <div class="modal fade bd-example-modal-sm" id="modelSuccess" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content d-flex flex-row align-items-center p-4">
+                <img class="mr-1" src="<?php echo (get_template_directory_uri() . '/upload/yes-icon.png'); ?>" style="width: 50px; height:50px" alt="Not found" />
+                <h1 class="m-0" style="display: inline-block;">Thành công</h1>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade bd-example-modal-sm" id="modelFail" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content d-flex flex-row align-items-center p-4">
+                <img class="mr-1" src="<?php echo (get_template_directory_uri() . '/upload/close-icon.png'); ?>" style="width: 50px; height:50px" alt="Not found" />
+                <h1 class="m-0" style="display: inline-block;">Thất bại</h1>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade bd-example-modal-sm" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content d-flex flex-row align-items-center p-4">
+                <form id="orderService">
+                    <input type="text" name="phone" placeholder="Số điện thoại của bạn" id="phone" />
+                    <input type="hidden" name="service_id" id="service_id" />
+                    <button>Gửi</button>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <form id="sortForm">
             <label for="posts">Sắp xếp theo: </label>
             <select id="posts" name="sort" onchange="javascript:this.form.submit()">
-                <option value="view_count" >Lượt xem</option>
-                <option value="mod_time" <?php echo(isset($_GET['sort']) && $_GET['sort'] === 'mod_time' ? 'selected' : '') ?>>Ngày phát hành</option>
-                <option value="title" <?php echo(isset($_GET['sort']) && $_GET['sort'] === 'title' ? 'selected' : '') ?>>Tên tiêu đề</option>
+                <option value="view_count">Lượt xem</option>
+                <option value="mod_time" <?php echo (isset($_GET['sort']) && $_GET['sort'] === 'mod_time' ? 'selected' : '') ?>>Ngày phát hành</option>
+                <option value="title" <?php echo (isset($_GET['sort']) && $_GET['sort'] === 'title' ? 'selected' : '') ?>>Tên tiêu đề</option>
                 <option value="order_count">Lượt sử dụng</option>
             </select>
         </form>
@@ -20,69 +47,69 @@
             <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
                 <div class="page-wrapper">
                     <div class="blog-list clearfix">
-                    <?php 
-                        while($data['services_filter'] && $row = mysqli_fetch_array($data['services_filter'])) {
-                    ?>
-                        <div class="blog-box row">
-                            <div class="col-md-4">
-                                <div class="post-media">
-                                    <a href="?id=<?php echo($row['id'])?>" title="">
-                                        <img src="<?php echo($row['thumbnail'])?>" alt="" class="img-fluid">
-                                        <div class="hovereffect"></div>
-                                    </a>
-                                </div><!-- end media -->
-                            </div><!-- end col -->
+                        <?php
+                        while ($data['services_filter'] && $row = mysqli_fetch_array($data['services_filter'])) {
+                        ?>
+                            <div class="blog-box row">
+                                <div class="col-md-4">
+                                    <div class="post-media">
+                                        <a href="?id=<?php echo ($row['id']) ?>" title="">
+                                            <img src="<?php echo ($row['thumbnail']) ?>" alt="" class="img-fluid">
+                                            <div class="hovereffect"></div>
+                                        </a>
+                                    </div><!-- end media -->
+                                </div><!-- end col -->
+                                <div class="blog-meta big-meta col-md-8">
+                                    <h4><a href="?id=<?php echo ($row[0]) ?>" title=""><?php echo ($row['title']) ?></a></h4>
+                                    <p><?php
+                                        $str = $row['content'];
+                                        $str = preg_replace('/<\w*>/', ' ', $str);
+                                        $str = preg_replace('/<\/\w{1,8}$/', ' ', $str);
+                                        $str = preg_replace('/<\/\w*>/', ' ', $str);
+                                        $str = trim($str);
+                                        echo ($str);
+                                        ?></p>
+                                    <div><button class="btn" onclick="showModal(<?php echo ($row['id']) ?>)">Đặt dịch vụ</button></div>
+                                    <small><a href="?id=<?php echo ($row[0]) ?>" title=""><?php echo (date_format(date_create($row['mod_time']), "d F Y")); ?> </a></small>
+                                    <small><a href="#" title=""><?php echo ($row['price']) ?></a></small>
+                                    <small><a href="#" title=""><i class="fa fa-eye"></i> <?php echo ($row['view_count']) ?></a></small>
+                                    <small><a href="#" title=""><i class="fa fa-user"></i> <?php echo ($row['order_count']) ?></a></small>
+                                </div><!-- end meta -->
+                            </div><!-- end blog-box -->
 
-                            <div class="blog-meta big-meta col-md-8">
-                                <h4><a href="?id=<?php echo($row[0])?>" title=""><?php echo($row['title'])?></a></h4>
-                                <p><?php 
-                                    $str = $row['content'];
-                                    $str = preg_replace('/<\w*>/', ' ', $str);
-                                    $str = preg_replace('/<\/\w{1,8}$/', ' ', $str);
-                                    $str = preg_replace('/<\/\w*>/', ' ', $str);
-                                    $str = trim($str);
-                                    echo($str);
-                                ?></p>
-                                <small><a href="?id=<?php echo($row[0])?>" title=""><?php echo(date_format(date_create($row['mod_time']),"d F Y")); ?> </a></small>
-                                <small><a href="#" title=""><?php echo($row['price']) ?></a></small>
-                                <small><a href="#" title=""><i class="fa fa-eye"></i> <?php echo($row['view_count']) ?></a></small>
-                                <small><a href="#" title=""><i class="fa fa-user"></i> <?php echo($row['order_count']) ?></a></small>
-                            </div><!-- end meta -->
-                        </div><!-- end blog-box -->
+                            <hr class="invis">
 
+                        <?php } ?>
                         <hr class="invis">
 
-                    <?php }?>         
-                    <hr class="invis">
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <nav aria-label="Page navigation">
-                                <ul class="pagination justify-content-start">
-                                    <li class="page-item">
-                                        <a class="page-link" href="<?php 
-                                            echo($params.'&pg='.(--$page));
-                                        ?>">
-                                            <?php echo($page); ?>
-                                        </a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="<?php 
-                                            echo($params.'&pg='.(++$page));
-                                        ?>">
-                                            <?php echo($page) ?>                                        
-                                        </a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="<?php 
-                                            echo($params.'&pg='.(++$page));
-                                        ?>">
-                                            <?php echo($page); ?>                                        
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div><!-- end col -->
-                    </div><!-- end row -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination justify-content-start">
+                                        <li class="page-item">
+                                            <a class="page-link" href="<?php
+                                                                        echo ($params . '&pg=' . (--$page));
+                                                                        ?>">
+                                                <?php echo ($page); ?>
+                                            </a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="<?php
+                                                                        echo ($params . '&pg=' . (++$page));
+                                                                        ?>">
+                                                <?php echo ($page) ?>
+                                            </a>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="<?php
+                                                                                            echo ($params . '&pg=' . (++$page));
+                                                                                            ?>">
+                                                <?php echo ($page); ?>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div><!-- end col -->
+                        </div><!-- end row -->
 
                     </div><!-- end blog-list -->
                 </div><!-- end page-wrapper -->
@@ -91,10 +118,10 @@
             <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                 <div class="sidebar">
                     <div class="widget">
-                        <form method = "GET" action="/wordpress/search/" >
+                        <form method="GET" action="/wordpress/search/">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tìm kiếm</label>
-                                <input type="text" class="form-control" aria-describedby="emailHelp" name="q"/>
+                                <input type="text" class="form-control" aria-describedby="emailHelp" name="q" />
                             </div>
                             <button type="submit" class="btn btn-primary">Search</button>
                         </form>
@@ -106,7 +133,7 @@
                             <div class="blog-box">
                                 <div class="post-media">
                                     <a href="https://www.youtube.com/watch?v=Fl5nEO7Pk8o" title="Cài windows 10">
-                                        <iframe src="https://www.youtube.com/embed/Fl5nEO7Pk8o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                                
+                                        <iframe src="https://www.youtube.com/embed/Fl5nEO7Pk8o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                     </a>
                                 </div><!-- end media -->
                                 <div class="blog-meta">
@@ -118,7 +145,7 @@
                             <div class="blog-box">
                                 <div class="post-media">
                                     <a href="https://www.youtube.com/watch?v=Fl5nEO7Pk8o" title="Cài Office 365">
-                                        <iframe src="https://www.youtube.com/embed/vCm4yG9oXlE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                            
+                                        <iframe src="https://www.youtube.com/embed/vCm4yG9oXlE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                     </a>
                                 </div><!-- end media -->
                                 <div class="blog-meta">
@@ -147,17 +174,17 @@
                         <h2 class="widget-title">Diễn đàn nổi bật</h2>
                         <div class="blog-list-widget">
                             <div class="list-group">
-                            <?php 
-                                while($data['forums_popular'] && $row = mysqli_fetch_array($data['forums_popular'])) {
-                            ?>
-                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="w-100 justify-content-between">
-                                        <h5 class="mb-1"><?php echo($row['title'])?></h5>                                                
-                                        <small><?php echo(date_format(date_create($row['mod_time']),"d F Y")); ?> </small>
-                                        <small><i class="fa fa-eye"></i> <?php echo($row['view_count']) ?> </small>
-                                    </div>
-                                </a>
-                            <?php } ?>
+                                <?php
+                                while ($data['forums_popular'] && $row = mysqli_fetch_array($data['forums_popular'])) {
+                                ?>
+                                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                        <div class="w-100 justify-content-between">
+                                            <h5 class="mb-1"><?php echo ($row['title']) ?></h5>
+                                            <small><?php echo (date_format(date_create($row['mod_time']), "d F Y")); ?> </small>
+                                            <small><i class="fa fa-eye"></i> <?php echo ($row['view_count']) ?> </small>
+                                        </div>
+                                    </a>
+                                <?php } ?>
                             </div>
                         </div><!-- end blog-list -->
                     </div><!-- end widget -->
@@ -201,3 +228,35 @@
         </div><!-- end row -->
     </div><!-- end container -->
 </section>
+
+<script>
+    const serviceInput = document.getElementById("service_id");
+    const orderService = document.getElementById("orderService");
+
+    const showModal = (service_id) => {
+        serviceInput.value = service_id;
+        $('#modalForm').modal('show');
+    }
+
+    $("#orderService").submit(function(e) {
+    e.preventDefault(); // avoid to execute the actual submit of the form.
+
+    var form = $("#orderService");
+    $("#modalForm").modal("hide");
+
+    $.ajax({
+      type: "POST",
+      url: "<?php echo (get_template_directory_uri() . "/mvc/ajax/order-service.php") ?>",
+      data: form.serialize(), // serializes the form's elements.
+      success: function(data) {
+        var dataJson = JSON.parse(data);
+        if (dataJson.success) {
+          $('#modelSuccess').modal('show');
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        } else $('#modelFail').modal('show');
+      }
+    });
+  });
+</script>

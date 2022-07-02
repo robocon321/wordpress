@@ -63,9 +63,9 @@
             <td><span class="address" aria-hidden="true"><?php echo($row['province'])?>,<?php echo($row['district'])?></span></td>
             <td><span class="status" aria-hidden="true">
             <?php 
-              if($row['status'] == 0) echo("<span style='color: brown'>Xin việc</span>");
-              else if($row['status'] == 0) echo("<span style='color: red'>Không nhận</span>");
-              else echo("<span style='color: red'>Đã duyệt</span>");
+              if($row['status'] == 0) echo("<span style='color: orange'>Xin việc</span>");
+              else if($row['status'] == 1) echo("<span style='color: red'>Bị loại</span>");
+              else echo("<span style='color: green'>Đã duyệt</span>");
             ?>
             </span></td>
             <td><span aria-hidden="true"><?php echo($row['total'])?></span></td>

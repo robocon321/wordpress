@@ -79,6 +79,20 @@ function forum_add_admin_page() {
 
 add_action('admin_menu', 'forum_add_admin_page');
 
+// manage work
+function manage_task_admin_page() {
+  add_menu_page(
+  'Tasks Theme Options', 
+  'Tasks', 
+  'manage_options', 
+  'tasks', 
+  'custom_theme_create_page',
+  get_template_directory_uri().'/icons/task.png', 
+  114);
+}
+
+add_action('admin_menu', 'manage_task_admin_page');
+
 
 function custom_theme_create_page() {
   require_once("mvc/Bridge.php");
