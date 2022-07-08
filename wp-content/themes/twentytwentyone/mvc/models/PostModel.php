@@ -6,7 +6,6 @@
       JOIN wp_term_taxonomy WTT ON WTT.term_taxonomy_id = WTR.term_taxonomy_id
       JOIN wp_terms WT ON WT.term_id = WTT.term_id 
       JOIN wp_users WU ON WU.ID = WP.post_author 
-      JOIN wp_postmeta WPM ON WP.ID = WPM.post_id
       WHERE WP.post_type = 'post' ";
 
       if(isset($conditions)) {

@@ -11,11 +11,11 @@
     }
 
     public function getEmployeeSumary($search = '', $offset = 0, $limit = 10, $sortby = 'name', $isASC = true, $conditions = []) {
-      $query = "SELECT ME.id, ME.name name, ME.email email, ME.phone phone, ME.province province, ME.status status, ME.district district , COUNT(MO.service_id) total, 
+      $query = "SELECT ME.id, ME.name `name`, ME.email email, ME.phone phone, ME.province province, ME.status `status`, ME.district district , COUNT(MC.service_id) total, 
       (
-          SELECT COUNT(id) FROM my_orders WHERE is_success = 1 AND employee_id = MO.employee_id
+          SELECT COUNT(id) FROM my_customers WHERE status = 1 AND employee_id = MC.employee_id
       ) success_true
-      FROM my_employees ME LEFT JOIN my_orders MO ON ME.id = MO.employee_id ";
+      FROM my_employees ME LEFT JOIN my_customers MC ON ME.id = MC.employee_id ";
 
       $query = $query." WHERE ME.name LIKE '%".$search."%' ";
 
@@ -25,7 +25,7 @@
         }
       }
 
-      $query = $query." GROUP BY MO.employee_id ";
+      $query = $query." GROUP BY MC.employee_id, ME.id ";
       if(isset($sortby)) {
         $query = $query."ORDER BY ".$sortby." ";
         if(isset($isASC)) $query = $query."ASC ";

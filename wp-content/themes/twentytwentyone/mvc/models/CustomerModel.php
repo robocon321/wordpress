@@ -17,14 +17,30 @@ class CustomerModel extends Database
     return $arr;
   }
 
-  public function insertCustomer($name = '', $birthday = '', $email = '', $phone = '', $province = '-1', $district = '-1', $street = '', $cre_time = '', $mod_time = '')
+  public function insertCustomer($name = '', $birthday = '', $email = '', $phone = '', $province = '-1', $district = '-1', $street = '', $cre_time = '', $mod_time = '', $service_id = null, $status = 0, $employee_id = null)
   {
     $cre_time = date("Y-m-d H:i:s");
     $mod_time = $cre_time;
     $province = ($province != '') ? $province : '-1';
     $district = ($district != '') ? $district : '-1';
-    $query = "INSERT INTO `my_customers` (`id`, `name`, `phone`, `email`, `birthday`, `province`, `district`, `street`,`cre_time`, `mod_time`)" .
-      " VALUES(0, '" . $name . "', '" . $phone . "', '" . $email . "', '" . $birthday . "', '" . $province . "', '" . $district . "',  '" . $street . "', '" . $cre_time . "', '" . $mod_time . "')";
+    
+    $query = "INSERT INTO `my_customers` (`id`, `name`, `phone`, `email`, `birthday`, `province`, `district`, `street`,`cre_time`, `mod_time`, `service_id`, `status`, `employee_id`)" .
+      " VALUES(0, '" . $name . "', '" . $phone . "', '" . $email . "', '" . $birthday . "', '" . $province . "', '" . $district . "',  '" . $street . "', '" . $cre_time . "', '" . $mod_time . "'";
+
+    if($service_id == null) {
+      $query = $query.", NULL";
+    } else {
+      $query = $query.", ".$service_id;
+    }
+
+    $query = $query.", ".$status;
+
+    if($employee_id == null) {
+      $query = $query.", NULL);";
+    } else {
+      $query = $query.", ".$employee_id;
+    }
+  
     if (mysqli_query($this->conn, $query)) return $this->conn->insert_id;
     else return 0;
   }

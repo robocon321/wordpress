@@ -19,6 +19,7 @@
           <p class="search-box">
             <label class="screen-reader-text" for="post-search-input">Search Feedbacks:</label>
             <input type="search" id="post-search-input" name="search" value="<?php echo(isset($_GET['search']) ? $_GET['search'] : '');?>">
+            <input type="hidden" name="page" value="<?php echo($_GET['page']);?>" />
             <input type="submit" id="search-submit" class="button" value="Search feedbacks">
           </p>
         </div>

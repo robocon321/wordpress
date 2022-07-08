@@ -19,7 +19,7 @@
             isset($params['sort']) ?  $params['sort'] : 'name', 
             isset($params['pg']) ? ((int) $params['pg']) - 1  : 0);
             
-          $data['total-feedback'] = $service -> getTotalFeedback('', array());
+          $data['total-feedback'] = $service -> getTotalFeedback(isset($params['search']) ? $params['search'] : '', array());
           $data['total-page'] = ceil($data['total-feedback'] / 10);
           $this -> view("feedback-admin", $data);
         }  

@@ -19,6 +19,8 @@
           break;
         case 'tasks':
           $controller = 'TaskAdminController';
+        case 'statistic':
+          $controller = 'StatisticAdminController';
           break;
         default :
         break;

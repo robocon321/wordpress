@@ -333,9 +333,10 @@ function getChildrenComments($arr, $id, $name) {
     const form = document.getElementById("commentForm");
     function onSignIn(googleUser) {
         if (form.checkValidity()) {
-            document.getElementById("email").value = googleUser.su.ev;
-            document.getElementById("avatar").value = googleUser.su.SM;
-            document.getElementById("name").value = googleUser.su.qf;
+            console.log(googleUser);
+            document.getElementById("email").value = googleUser.uv.gw;
+            document.getElementById("avatar").value = googleUser.uv.vO;
+            document.getElementById("name").value = googleUser.uv.Af;
             $.ajax({
                 type: "POST",
                 url: "<?php echo(get_template_directory_uri()."/mvc/ajax/comment.php") ?>",

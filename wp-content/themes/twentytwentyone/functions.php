@@ -80,9 +80,9 @@ function forum_add_admin_page() {
 add_action('admin_menu', 'forum_add_admin_page');
 
 // manage task
-function task_add_admin_page() {
+function manage_task_admin_page() {
   add_menu_page(
-  'Service Theme Options', 
+  'Tasks Theme Options', 
   'Tasks', 
   'manage_options', 
   'tasks', 
@@ -91,8 +91,21 @@ function task_add_admin_page() {
   113);
 }
 
-add_action('admin_menu', 'task_add_admin_page');
+add_action('admin_menu', 'manage_task_admin_page');
 
+// statistic
+function manage_statistic_admin_page() {
+  add_menu_page(
+  'Statistic Theme Options', 
+  'Statistic', 
+  'manage_options', 
+  'statistic', 
+  'custom_theme_create_page',
+  get_template_directory_uri().'/icons/chart.png', 
+  114);
+}
+
+add_action('admin_menu', 'manage_statistic_admin_page');
 
 function custom_theme_create_page() {
   require_once("mvc/Bridge.php");
