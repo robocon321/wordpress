@@ -22,7 +22,6 @@
                     <div class="blog-list clearfix">
                     <?php 
                         while($data['posts_filter'] && $row = mysqli_fetch_array($data['posts_filter'])) {
-                        print_r($row);
                     ?>
                         <div class="blog-box row">
                             <div class="col-md-4">
@@ -95,7 +94,8 @@
                         <form method = "GET" action="/wordpress/search/" >
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tìm kiếm</label>
-                                <input type="text" class="form-control" aria-describedby="emailHelp" name="q"/>
+                                <input type="text" class="form-control" aria-describedby="emailHelp" name="search"/>
+                                <input type="hidden" name="options" value="wp_posts" />
                             </div>
                             <button type="submit" class="btn btn-primary">Search</button>
                         </form>

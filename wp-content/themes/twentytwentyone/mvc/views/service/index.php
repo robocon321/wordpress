@@ -23,12 +23,47 @@ else $page = $_GET['pg'];
         </div>
     </div>
     <div class="modal fade bd-example-modal-sm" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content d-flex flex-row align-items-center p-4">
-                <form id="orderService">
-                    <input type="text" name="phone" placeholder="Số điện thoại của bạn" id="phone" />
+        <div class="modal-dialog">
+            <div class="modal-content d-flex flex-row align-items-center p-4" style="width: 600px;">
+                <form id="form_customer">
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" value="<?php echo isset($customer['id']) ? $customer['id'] : "" ?>" id="id" name="customer_id" />
+                    </div>
                     <input type="hidden" name="service_id" id="service_id" />
-                    <button>Gửi</button>
+                    <div class="form-group">
+                        <label for="name">Tên</label>
+                        <input type="text" class="form-control" value="<?php echo  isset($customer['name']) ? $customer['name'] : '' ?>" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" value="<?php echo  isset($customer['email']) ? $customer['email'] : '' ?>" id="email" name="email" />
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Số điện thoại</label>
+                        <input type="phone" class="form-control" value="<?php echo isset($customer['phone']) ? $customer['phone'] : '' ?>" id="phone" name="phone" />
+                    </div>
+                    <div class="form-group ">
+                        <label for="birthday">Ngày sinh</label>
+                        <input type="date" class="form-control" value="<?php echo isset($customer['birthday']) ? (substr($customer['birthday'], 0, 10)) : '' ?>" id="birthday" name="birthday" />
+                    </div>
+                    <label><b>Địa chỉ:</b></label>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="province">Tỉnh/Thành phố</label>
+                            <select class="form-control" name="province" id="province">
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="district">Quận/Huyện</label>
+                            <select class="form-control" name="district" id="district">
+                            </select>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="street">Đường</label>
+                            <input type="text" class="form-control" value="<?php echo isset($customer['street']) ? $customer['street'] : '' ?>" name="street" id="street" />
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" id="btn_save">Cập nhật</button>
                 </form>
             </div>
         </div>
@@ -121,7 +156,8 @@ else $page = $_GET['pg'];
                         <form method="GET" action="/wordpress/search/">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tìm kiếm</label>
-                                <input type="text" class="form-control" aria-describedby="emailHelp" name="q" />
+                                <input type="text" class="form-control" aria-describedby="emailHelp" name="search" />
+                                <input type="hidden" name="options" value="my_services" />
                             </div>
                             <button type="submit" class="btn btn-primary">Search</button>
                         </form>
@@ -231,32 +267,99 @@ else $page = $_GET['pg'];
 
 <script>
     const serviceInput = document.getElementById("service_id");
-    const orderService = document.getElementById("orderService");
 
     const showModal = (service_id) => {
         serviceInput.value = service_id;
         $('#modalForm').modal('show');
     }
 
-    $("#orderService").submit(function(e) {
-    e.preventDefault(); // avoid to execute the actual submit of the form.
+    var selectedProvince = "<?php echo isset($customer['district']) ? $customer['district'] : 'null' ?>";
+        var selectedDistrict = "<?php echo isset($customer['province']) ? $customer['province'] : 'null' ?>"
 
-    var form = $("#orderService");
-    $("#modalForm").modal("hide");
+        function showDistricts(provinceId) {
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "https://provinces.open-api.vn/api/?depth=2",
+                success: function(data) {
+                    $.each(data[provinceId].districts, function(key, value) {
+                        if (key != selectedDistrict) {
+                            $("#district").append('<option value = "' + key + '">' + value.name + '</option>');
+                        } else {
+                            $("#district").append(' <option value = "' + key + '" selected>' + value.name + '</option>');
+                        }
+                        //console.log(key + ": " + value.name);
+                    });
+                }
+            });
+        }
 
-    $.ajax({
-      type: "POST",
-      url: "<?php echo (get_template_directory_uri() . "/mvc/ajax/order-service.php") ?>",
-      data: form.serialize(), // serializes the form's elements.
-      success: function(data) {
-        var dataJson = JSON.parse(data);
-        if (dataJson.success) {
-          $('#modelSuccess').modal('show');
-          setTimeout(() => {
-            window.location.reload();
-          }, 2000);
-        } else $('#modelFail').modal('show');
-      }
-    });
-  });
+        $(document).ready(function() {
+
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "https://provinces.open-api.vn/api/?depth=2",
+                success: function(data) {
+                    if (selectedProvince == -1 || $("#id").val() == '') {
+                        $("#province").append('<option value = "" selected ></option>');
+                    }
+                    $.each(data, function(k, v) {
+
+                        if (k != selectedProvince || selectedProvince == 'null') {
+                            $("#province").append('<option value = "' + k + '">' + v.name + '</option>');
+                        } else {
+                            $("#province").append(' <option value = "' + k + '" selected>' + v.name + '</option>');
+                            //console.log(data[k])
+                            showDistricts(k);
+                        }
+                    });
+                }
+            });
+
+            if ($("#id").val() == '') {
+                $("#btn_save").html("Thêm mới");
+            } else {
+                $("#btn_save").html("Cập nhật");
+            }
+
+        });
+
+        $("#province").change(function() {
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "https://provinces.open-api.vn/api/?depth=2",
+                success: function(data) {
+                    selectedProvince = $("#province").val();
+                    //selectedDistrict = $("#district").val();
+                    selectedDistrict = null;
+                    //console.log(selectedProvince)
+
+                    $('#district option').each(function() {
+                        $(this).remove();
+                    });
+                    showDistricts(selectedProvince);
+                }
+            });
+        });
+
+        $("#btn_save").click(function(e) {
+            e.preventDefault();
+            $('#modalForm').modal('hide');
+
+            var form = $("#form_customer");
+            $.ajax({
+                type: "POST",
+                url: "<?php echo (get_template_directory_uri() . "/mvc/ajax/admin/save-customer.php") ?>",
+                data: form.serialize(), // serializes the form's elements.
+
+                success: function(data) {
+                    $('#modelSuccess').modal('show');
+                },
+                error: function(error) {
+                    $('#modelFail').modal('show');
+                }
+            });
+        });
 </script>

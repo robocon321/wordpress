@@ -210,7 +210,7 @@
                         <form method = "GET" action="/wordpress/search/" >
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tìm kiếm</label>
-                                <input type="text" class="form-control" aria-describedby="emailHelp" name="q"/>
+                                <input type="text" class="form-control" aria-describedby="emailHelp" name="search"/>
                             </div>
                             <button type="submit" class="btn btn-primary">Search</button>
                         </form>

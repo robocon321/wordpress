@@ -79,7 +79,7 @@ function forum_add_admin_page() {
 
 add_action('admin_menu', 'forum_add_admin_page');
 
-// manage work
+// manage task
 function manage_task_admin_page() {
   add_menu_page(
   'Tasks Theme Options', 
@@ -92,6 +92,20 @@ function manage_task_admin_page() {
 }
 
 add_action('admin_menu', 'manage_task_admin_page');
+
+// statistic
+function manage_statistic_admin_page() {
+  add_menu_page(
+  'Statistic Theme Options', 
+  'Statistic', 
+  'manage_options', 
+  'statistic', 
+  'custom_theme_create_page',
+  get_template_directory_uri().'/icons/chart.png', 
+  114);
+}
+
+add_action('admin_menu', 'manage_statistic_admin_page');
 
 
 function custom_theme_create_page() {

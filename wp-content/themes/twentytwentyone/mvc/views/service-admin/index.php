@@ -2,7 +2,7 @@
     $params = '?1';
     $params = $params.'&page='.$_GET['page'];
     if(isset($_GET['sort'])) $params = $params.'&sort='.$_GET['sort'];
-    if(isset($_GET['search'])) $params = '&search='.$_GET['search'];
+    if(isset($_GET['search'])) $params = $params.'&search='.$_GET['search'];
     if(!isset($_GET['pg']) || $_GET['pg'] < 2) $page = 2;
     else $page = $_GET['pg'];
 ?>
@@ -26,11 +26,11 @@
         </div>
         <h2 class="screen-reader-text">Posts list navigation</h2>
         <div class="tablenav-pages"><span class="displaying-num"><?php echo($data['total-service'])?> items</span>
-            <a class="first-page button" href="<?php echo($params);?>&pg=1"><span class="screen-reader-text">First page</span><span aria-hidden="true">«</span></a>
-            <a class="previous-page button" href="<?php echo($params);?>&pg=<?php echo($page - 1)?>"><span class="screen-reader-text">Previous page</span><span aria-hidden="true">‹</span></a></span>
+            <a class="first-page button" href="http://localhost/wordpress/wp-admin/admin.php<?php echo($params);?>&pg=1"><span class="screen-reader-text">First page</span><span aria-hidden="true">«</span></a>
+            <a class="previous-page button" href="http://localhost/wordpress/wp-admin/admin.php<?php echo($params);?>&pg=<?php echo($page - 1)?>"><span class="screen-reader-text">Previous page</span><span aria-hidden="true">‹</span></a></span>
             <span class="paging-input"><label for="current-page-selector" class="screen-reader-text">Current Page</label><input class="current-page" type="number" min="1" max="<?php echo($data['total-page']) ?>" id="current-page-selector" name="pg" value="<?php echo(isset($_GET['pg']) ? $_GET['pg'] : 1);?>" size="1" aria-describedby="table-paging"><span class="tablenav-paging-text"> of <span class="total-pages"><?php echo($data['total-page'])?></span></span></span>
-            <a class="next-page button" href="<?php echo($params);?>&pg=<?php echo($data['total-page'] == 1 ? 1 : ((isset($_GET['pg']) && $_GET['pg'] == 1) || !isset($_GET['pg']) ? 2  : $page + 1)) ?>"><span class="screen-reader-text">Next page</span><span aria-hidden="true">›</span></a>
-            <a class="last-page button" href="<?php echo($params);?>&pg=<?php echo($data['total-page'])?>"><span class="screen-reader-text">Last page</span><span aria-hidden="true">»</span></a></span>
+            <a class="next-page button" href="http://localhost/wordpress/wp-admin/admin.php<?php echo($params);?>&pg=<?php echo($data['total-page'] == 1 ? 1 : ((isset($_GET['pg']) && $_GET['pg'] == 1) || !isset($_GET['pg']) ? 2  : $page + 1)) ?>"><span class="screen-reader-text">Next page</span><span aria-hidden="true">›</span></a>
+            <a class="last-page button" href="http://localhost/wordpress/wp-admin/admin.php<?php echo($params);?>&pg=<?php echo($data['total-page'])?>"><span class="screen-reader-text">Last page</span><span aria-hidden="true">»</span></a></span>
         </div>
         <br class="clear">
       </div>

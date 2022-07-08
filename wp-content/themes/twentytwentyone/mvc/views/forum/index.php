@@ -100,7 +100,8 @@
                         <form method = "GET" action="/wordpress/search/" >
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tìm kiếm</label>
-                                <input type="text" class="form-control" aria-describedby="emailHelp" name="q"/>
+                                <input type="text" class="form-control" aria-describedby="emailHelp" name="search"/>
+                                <input type="hidden" name="options" value="my_forums" />
                             </div>
                             <button type="submit" class="btn btn-primary">Search</button>
                         </form>
