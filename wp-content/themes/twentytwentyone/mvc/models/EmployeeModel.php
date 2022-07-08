@@ -79,6 +79,12 @@
         return mysqli_query($this -> conn, $query);
       }
     } 
+    
+    public function getAllEmployees()
+    {
+      $query = "SELECT * FROM my_employees ";
+      return mysqli_query($this->conn, $query);
+    }
   }
 
   

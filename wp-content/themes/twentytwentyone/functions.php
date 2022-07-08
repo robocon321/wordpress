@@ -88,7 +88,7 @@ function manage_task_admin_page() {
   'tasks', 
   'custom_theme_create_page',
   get_template_directory_uri().'/icons/task.png', 
-  114);
+  113);
 }
 
 add_action('admin_menu', 'manage_task_admin_page');
@@ -106,7 +106,6 @@ function manage_statistic_admin_page() {
 }
 
 add_action('admin_menu', 'manage_statistic_admin_page');
-
 
 function custom_theme_create_page() {
   require_once("mvc/Bridge.php");
