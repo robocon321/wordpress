@@ -17,6 +17,9 @@
         case 'forums':
           $controller = 'ForumAdminController';
           break;
+        case 'statistic':
+          $controller = 'StatisticAdminController';
+          break;
         default :
         break;
       }

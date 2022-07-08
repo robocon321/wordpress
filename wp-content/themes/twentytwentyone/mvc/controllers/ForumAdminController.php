@@ -20,7 +20,7 @@
             isset($params['sort']) ?  $params['sort'] : 'title', 
             isset($params['pg']) ? ((int) $params['pg']) - 1  : 0);
             
-          $data['total-forum'] = $service -> getTotalForum('', array());
+          $data['total-forum'] = $service -> getTotalForum(isset($params['search']) ? $params['search'] : '', array());
           $data['total-page'] = ceil($data['total-forum'] / 10);
           $this -> view("forum-admin", $data);
         }  

@@ -126,9 +126,9 @@
     const form = document.getElementById("forumForm");
     function onSignIn(googleUser) {
         if (form.checkValidity()) {
-            document.getElementById("email").value = googleUser.su.ev;
-            document.getElementById("avatar").value = googleUser.su.SM;
-            document.getElementById("name").value = googleUser.su.qf;
+            document.getElementById("email").value = googleUser.uv.gw;
+            document.getElementById("avatar").value = googleUser.uv.vO;
+            document.getElementById("name").value = googleUser.uv.Af;
             document.getElementById("content").value = content.getData();
             $.ajax({
                 type: "POST",

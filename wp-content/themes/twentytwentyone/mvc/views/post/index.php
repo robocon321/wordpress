@@ -26,7 +26,7 @@
                         <div class="blog-box row">
                             <div class="col-md-4">
                                 <div class="post-media">
-                                    <a href="?id=<?php echo($row['ID'])?>" title="">
+                                    <a href="?id=<?php echo($row[0])?>" title="">
                                         <img src="<?php echo(get_template_directory_uri().'/upload/tech_blog_01.jpg'); ?>" alt="" class="img-fluid">
                                         <div class="hovereffect"></div>
                                     </a>
@@ -94,7 +94,8 @@
                         <form method = "GET" action="/wordpress/search/" >
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tìm kiếm</label>
-                                <input type="text" class="form-control" aria-describedby="emailHelp" name="q"/>
+                                <input type="text" class="form-control" aria-describedby="emailHelp" name="search"/>
+                                <input type="hidden" name="options" value="wp_posts" />
                             </div>
                             <button type="submit" class="btn btn-primary">Search</button>
                         </form>

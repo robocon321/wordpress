@@ -16,7 +16,7 @@
           isset($params['sort']) ?  $params['sort'] : 'name', 
           isset($params['pg']) ? ((int) $params['pg']) - 1  : 0);
           
-        $data['total-employee'] = $service -> getTotalEmployee('', array());
+        $data['total-employee'] = $service -> getTotalEmployee(isset($params['search']) ? $params['search'] : '', array());
         $data['total-page'] = ceil($data['total-employee'] / 10);
         $this -> view("employee-admin", $data);
       }

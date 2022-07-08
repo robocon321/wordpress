@@ -8,7 +8,7 @@
       $this -> serviceModel = new ServiceModel();
     }
 
-    public function getServiceSumary($search, $sort, $page = 0) {
+    public function getServiceSumary($search, $sort, $page = 0) {      
       return $this -> serviceModel -> getServiceSumary($search, $page * 10, 10, $sort, true);
     }
 

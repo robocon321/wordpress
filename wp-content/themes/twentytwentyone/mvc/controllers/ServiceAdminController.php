@@ -22,7 +22,7 @@
             isset($params['sort']) ?  $params['sort'] : 'name', 
             isset($params['pg']) ? ((int) $params['pg']) - 1  : 0);
             
-          $data['total-service'] = $service -> getTotalService('', array());
+          $data['total-service'] = $service -> getTotalService(isset($params['search']) ? $params['search'] : '', array());
           $data['total-page'] = ceil($data['total-service'] / 10);
           $this -> view("service-admin", $data);
         }  
