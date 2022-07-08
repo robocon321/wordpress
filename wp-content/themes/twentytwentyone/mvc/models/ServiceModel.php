@@ -110,5 +110,11 @@
       return mysqli_query($this -> conn, $query);
     }
 
+    public function getAllServices()
+    {
+      $query = "SELECT * FROM my_services ";
+      return mysqli_query($this->conn, $query);
+    }
+
   }
 ?>

@@ -17,6 +17,9 @@
         case 'forums':
           $controller = 'ForumAdminController';
           break;
+        case 'tasks':
+          $controller = 'TaskAdminController';
+          break;
         default :
         break;
       }

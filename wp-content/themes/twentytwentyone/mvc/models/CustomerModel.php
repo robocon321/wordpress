@@ -121,4 +121,11 @@ class CustomerModel extends Database
     $query = "DELETE FROM my_customers WHERE id = " . $customer_id;
     mysqli_query($this->conn, $query);
   }
+
+  public function getCustomers()
+  {
+    $query = "SELECT * FROM my_customers ";
+    return mysqli_query($this->conn, $query);
+  }
+
 }
