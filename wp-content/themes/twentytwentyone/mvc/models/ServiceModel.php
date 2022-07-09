@@ -56,7 +56,7 @@
 
     public function getServiceSumary($search = '', $offset = 0, $limit = 10, $sortby = 'name', $isASC = true, $conditions = []) {
       $query = "SELECT WU.user_nicename name, WU.user_email email ,MS.id, MS.title, MS.price, MS.view_count, MS.mod_time, COUNT(*) count FROM 
-      my_services MS LEFT JOIN my_orders MO ON MS.id = MO.service_id JOIN wp_users WU ON MS.author_id = WU.ID";
+      my_services MS LEFT JOIN my_customers MC ON MS.id = MC.service_id JOIN wp_users WU ON MS.author_id = WU.ID";
 
       $query = $query." WHERE MS.title LIKE '%".$search."%' ";
 
@@ -66,7 +66,7 @@
         }
       }
 
-      $query = $query." GROUP BY MO.service_id ";
+      $query = $query." GROUP BY MC.service_id ";
       if(isset($sortby)) {
         $query = $query."ORDER BY ".$sortby." ";
         if(isset($isASC)) $query = $query."ASC ";
