@@ -98,19 +98,19 @@ else $page = $_GET['pg'];
                                 <?php 
                                 switch ($row['status']) {
                                     case '0':
-                                        echo 'Đang chờ';
+                                        echo "<span style='color: olive'>Đang chờ</span>";
                                       break;
                                     case '1':
-                                        echo 'Đang làm';
+                                        echo "<span style='color: darkcyan'>Đang làm</span>";
                                       break;
                                     case '2':
-                                        echo 'Hoàn thành';
+                                        echo "<span style='color: green'>Hoàn thành</span>";
                                       break;
                                     case '3':
-                                        echo 'Đã hủy';
+                                        echo "<span style='color: gray'>Đã hủy</span>";
                                       break;
                                     default:
-                                      echo 'Bị lỗi';
+                                      echo "<span style='color: red'>Bị lỗi</span>";
                                   }
                                 ?>
                                 </span>

@@ -9,6 +9,7 @@ $model = new TaskModel();
 $id_emp = $_POST['id_emp'];
 $id_service = $_POST['id_service'];
 $phone_cus = $_POST['phone_cus'];
+$address_cus = $_POST['address_cus'];
 
 $customer_id = $_POST['id_cus'];
 $payment_fee = $_POST['payment_fee'];
@@ -21,12 +22,11 @@ $place_time = $_POST['place_time'];
 //update customer
 if ($_POST['task_id'] != '') {
   $id = $_POST['task_id'];
-  $order_id = $_POST['order_id'];
 
-  $fields = $model->taskModel($customer_id, $payment_fee, $warranty_period, $note, $place_time);
-  $model->updateTask($id, $fields, $order_id, $id_emp, $id_service, $phone_cus, $customer_id, $status);
+  $fields = $model->taskModel($customer_id, $payment_fee, $warranty_period, $note, $place_time, $id_emp);
+  $model->updateTask($id, $fields, $id_service, $phone_cus, $customer_id, $status, $address_cus);
 } else {
   //add a new customer
-  $data = $model->insertTask($id_emp, $id_service, $phone_cus, $customer_id, $payment_fee, $warranty_period, $status, $note, $place_time);
+  $data = $model->insertTask($id_emp, $id_service, $phone_cus, $customer_id, $payment_fee, $warranty_period, $status, $note, $place_time, $address_cus);
 }
 echo $data;

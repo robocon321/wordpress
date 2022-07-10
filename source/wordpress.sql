@@ -1701,3 +1701,39 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+--
+-- Table structure for table `my_employees`
+--
+
+CREATE TABLE `my_employees` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `birthday` datetime NOT NULL,
+  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `province` int(11) NOT NULL,
+  `district` int(11) NOT NULL,
+  `academic_level` int(11) NOT NULL,
+  `fields` text COLLATE utf8_unicode_ci NOT NULL,
+  `work_time` int(11) NOT NULL,
+  `cre_time` datetime DEFAULT curtime(),
+  `mod_time` datetime DEFAULT curtime(),
+  `status` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `my_employees`
+--
+
+INSERT INTO `my_employees` (`id`, `name`, `birthday`, `email`, `phone`, `province`, `district`, `academic_level`, `fields`, `work_time`, `cre_time`, `mod_time`, `status`) VALUES
+(4, 'Trịnh Thanh An', '2000-01-12 00:00:00', 'robocon321n@gmail.com', '+84354512411', 6, 5, 2, 'Nothing', 2184, '2021-12-31 03:43:41', '2021-12-31 03:43:41', 0),
+(5, 'Vương Cẩm Hồng', '2000-01-12 00:00:00', 'robocon321a@gmail.com', '+84354512888', 7, 2, 1, 'Nothing', 532992, '2021-12-31 03:48:36', '2021-12-31 03:48:36', 0),
+(6, 'Nguyễn Thanh Nhật', '2021-12-31 00:00:00', 'robocon321c@gmail.com', '+84354512222', 10, 0, 2, 'Nothing more', 782771, '2021-12-31 03:48:36', '2021-12-31 03:48:36', 0),
+(7, 'Bùi Tuấn Anh', '2021-12-31 00:00:00', 'robocon321r@gmail.com', '+84354512544', 6, 5, 2, 'Nothing', 524424, '2021-12-31 03:43:41', '2021-12-31 03:43:41', 0),
+(8, 'Shin', '2000-01-12 00:00:00', 'robocon321r@gmail.com', '+84354512113', 7, 2, 1, 'Nothing', 532992, '2021-12-31 03:48:36', '2021-12-31 03:48:36', 0),
+(9, 'Nobi Nobita', '2000-01-12 00:00:00', '18130164@st.hcmuaf.edu.vn', '+84354512938', 7, 2, 1, 'Nothing', 532992, '2021-12-31 03:48:36', '2021-12-31 03:48:36', 0),
+(45, 'Hà Văn Cần', '2022-01-11 00:00:00', 'a@gmail.com', '0123456789', 49, 7, 3, 'Lập trình website', 73, '2022-01-11 09:47:16', '2022-01-11 09:47:16', 2);
+
+-- --------------------------------------------------------

@@ -116,5 +116,11 @@
       return mysqli_query($this->conn, $query);
     }
 
+    public function getServiceByCustomer($id)
+    {
+      $query = "SELECT s.id, s.title, s.price FROM my_services s INNER JOIN my_customers c ON c.service_id = s.id where c.id =". $id;
+      return mysqli_query($this->conn, $query);
+    }
+
   }
 ?>
