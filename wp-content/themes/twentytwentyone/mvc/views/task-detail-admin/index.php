@@ -39,7 +39,7 @@
     ?>
     <form id="form_task">
         <input type="hidden" value="<?php echo isset($task['id']) ? $task['id'] : "" ?>" id="id" name="task_id" />
-        <input type="hidden" value="<?php echo isset($task['order_id']) ? $task['order_id'] : "" ?>" id="id" name="order_id" />
+       
         <b> <span>KHÁCH HÀNG</span></b>
         <button class="btn btn-outline-primary btn-sm mt-1 mb-1 ml-1" type="button" onclick="showCustomerList()">Chọn khách hàng</button>
         <button class="btn btn-outline-primary btn-sm mt-1 mb-1 ml-1" type="button" onclick="location.href='http://localhost/wordpress/wp-admin/admin.php?page=customers&action=new'">Thêm khách hàng</button>
@@ -59,7 +59,7 @@
             </div>
             <div class="col-md-12 mt-1 mb-1">
                 <label for="address_cus">Địa chỉ:</label>
-                <input type="text" id="address_cus" name="address_cus" class="form-control" readonly style="background:#f9f9f9 ;"
+                <input type="text" id="address_cus" name="address_cus" class="form-control"
                 value="<?php echo  isset($cus['street']) ? $cus['street'] : '' ?>">
             </div>
         </div>
@@ -278,7 +278,7 @@
                 url: "<?php echo (get_template_directory_uri() . "/mvc/ajax/admin/get-customer.php") ?>",
 
                 success: function(data) {
-                    $('#listCustomerAjax').parent().append(data)
+                    $('#listCustomerAjax').parent().html(data)
                 },
                 error: function(data) {
                     console.log("Error = " + data)
@@ -294,6 +294,26 @@
             $('#phone_cus').val(phone);
             $('#address_cus').val(address);
             $('#listCustomerModal').modal('hide');
+            if( $('#id_service').val()==''){
+                const id_cus = $('#id_cus').val();
+                $.ajax({
+                type: "POST",
+                url: "<?php echo (get_template_directory_uri() . "/mvc/ajax/admin/get-service-by-cus-id.php") ?>",
+                data:{'id_cus':id_cus},
+                success: function(data) {
+                    let text = data;
+                    const myArray = text.split(",");
+                    if(myArray.length==3){
+                        $('#id_service').val(myArray[0]);
+                        $('#title_service').val(myArray[1]);
+                        $('#price_service').val(myArray[2]);
+                    }
+                },
+                error: function(data) {
+                    console.log("Error = " + data)
+                }
+            });
+            }
         }
 
         function showServiceList() {
@@ -302,7 +322,7 @@
                 url: "<?php echo (get_template_directory_uri() . "/mvc/ajax/admin/get-service.php") ?>",
 
                 success: function(data) {
-                    $('#listServiceAjax').parent().append(data)
+                    $('#listServiceAjax').parent().html(data)
                 },
                 error: function(data) {
                     console.log("Error = " + data)
@@ -325,7 +345,7 @@
                 url: "<?php echo (get_template_directory_uri() . "/mvc/ajax/admin/get-employee.php") ?>",
 
                 success: function(data) {
-                    $('#listEmployeeAjax').parent().append(data)
+                    $('#listEmployeeAjax').parent().html(data)
                 },
                 error: function(data) {
                     console.log("Error = " + data)

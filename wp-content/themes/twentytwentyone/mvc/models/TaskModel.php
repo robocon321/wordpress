@@ -28,12 +28,11 @@ class TaskModel extends Database
     ) {
 
         $query = "SELECT MT.id, MT.status, MT.warranty_period, MT.payment_fee, MT.customer_id,
-        MC.name AS name_cus, MC.id AS cus_id, ME.name AS name_emp, ME.id AS emp_id, MS.title, MO.service_id , MT.cre_time
+        MC.name AS name_cus, MC.id AS cus_id, ME.name AS name_emp, ME.id AS emp_id, MS.title, MC.service_id , MT.cre_time
         FROM my_tasks MT 
         LEFT JOIN my_customers MC ON MT.customer_id = MC.id
-        LEFT JOIN my_orders MO ON MT.order_id = MO.id
-        LEFT JOIN my_employees ME ON MO.employee_id = ME.id
-        LEFT JOIN my_services MS ON MO.service_id = MS.id
+        LEFT JOIN my_employees ME ON MT.employee_id = ME.id
+        LEFT JOIN my_services MS ON MC.service_id = MS.id
         ";
 
 
@@ -61,25 +60,25 @@ class TaskModel extends Database
         return mysqli_query($this->conn, $query);
     }
     /******************************************************** */
-    public function updateTask($id = 0, $fields = [], $order_id = 0, $id_emp=0, $id_service=0, $phone_cus='', $customer_id= 0, $status=0)
+    public function updateTask($id = 0, $fields = [], $id_service=0, $phone_cus='', $customer_id= 0, $status=0, $address_cus ='')
     {
         if ($id == 0 || !isset($fields)) return 0;
         else {
             $query = "UPDATE my_tasks SET ";
+            $query = $query . " status = " . $status . ", ";
             foreach ($fields as $key => $value) {
                 $query = $query . $key . " = '" . $value . "', ";
             }
-            $query = $query . " status = '" . $status . "', ";
             $query = substr($query, 0, -2);
             $query = $query . " WHERE id = " . $id;
             $result =  mysqli_query($this->conn, $query);
 
-            if ($order_id != 0 || isset($orders)) {
-                $query = "UPDATE my_orders SET ";
-                $query = $query . " employee_id = " . $id_emp . ", ";
+            if ($customer_id != 0) {
+                $query = "UPDATE my_customers SET ";
                 $query = $query . " service_id = " . $id_service . ", ";
                 $query = $query . " phone = '" . $phone_cus . "' ";
-                $query = $query . " WHERE id = " . $order_id;
+                $query = $query . " street = '" . $address_cus . "' ";
+                $query = $query . " WHERE id = " . $customer_id;
                 $result =  mysqli_query($this->conn, $query);
             }
         }
@@ -122,37 +121,31 @@ class TaskModel extends Database
         $warranty_period = '',
         $status = '0',
         $note = '',
-        $place_time = ''
+        $place_time = '',
+        $address_cus = ''
     ) {
         $cre_time = date("Y-m-d H:i:s");
         $mod_time = $cre_time;
-        $is_success = 0;
-        if ($status == 2) {
-            $is_success = 1;
-        }
 
-        $query = "INSERT INTO `my_orders` (`phone`, `service_id`, `cre_time`, `mod_time`, `is_success`, `employee_id`)" .
-            " VALUES('" . $phone_cus . "', " . $id_service . ", '" . $cre_time . "', '" . $mod_time . "', '" . $is_success . "', " . $id_emp . ")";
+        $query = "UPDATE my_customers SET phone = ". $phone_cus . ", service_id = " . $id_service .", street = '" . $address_cus . "' where id = " . $customer_id;
         mysqli_query($this->conn, $query);
-        $order_id =  $this->conn->insert_id;
 
-
-        $query = "INSERT INTO `my_tasks` (`order_id`, `customer_id`, `payment_fee`, `warranty_period`, `status`, `cre_time`, `place_time`, `note`)" .
-            " VALUES('" . $order_id . "', '" . $customer_id  . "', '" . $payment_fee . "', '" . $warranty_period . "', '" . $status . "', '" . $cre_time . "',  '" . $place_time . "', '" . $note . "')";
-        mysqli_query($this->conn, $query);
+        $query = "INSERT INTO `my_tasks` (`employee_id`, `customer_id`, `payment_fee`, `warranty_period`, `status`, `cre_time`, `place_time`, `note`)" .
+            " VALUES(" . $id_emp . ", " . $customer_id  . ", '" . $payment_fee . "', '" . $warranty_period . "', '" . $status . "', '" . $cre_time . "',  '" . $place_time . "', '" . $note . "')";
 
         if (mysqli_query($this->conn, $query)) return $this->conn->insert_id;
         else return 0;
     }
 
-    function taskModel($customer_id, $payment_fee, $warranty_period, $note, $place_time)
+    function taskModel($customer_id, $payment_fee, $warranty_period, $note, $place_time, $employee_id)
     {
         $arr = array(
             "customer_id" => $customer_id,
             "payment_fee" => $payment_fee,
             "warranty_period" => $warranty_period,
             "note" => $note,
-            "place_time" => $place_time
+            "place_time" => $place_time,
+            "employee_id" => $employee_id
         );
         return $arr;
     }
@@ -162,8 +155,8 @@ class TaskModel extends Database
         if ($id == 0) return null;
         else {
             $query = "SELECT e.id, e.name, e.phone FROM my_employees e 
-            INNER JOIN my_orders o ON e.id=o.employee_id 
-            INNER JOIN my_tasks t ON o.id=t.order_id  WHERE t.id = " . $id;
+            INNER JOIN my_tasks t ON e.id=t.employee_id 
+            WHERE t.id = " . $id;
             $resultset = mysqli_query($this->conn, $query);
 
             if (mysqli_num_rows($resultset) > 0) {
@@ -179,10 +172,9 @@ class TaskModel extends Database
     {
         if ($id == 0) return null;
         else {
-            $query = "SELECT c.id, c.name, o.phone, c.street FROM my_customers c 
-            INNER JOIN my_tasks t ON c.id=t.customer_id 
-            INNER JOIN my_orders o ON o.id=t.order_id
-            WHERE t.id = " . $id;
+            $query = "SELECT c.id, c.name, c.phone, c.street FROM my_tasks t  
+            INNER JOIN my_customers c  ON c.id=t.customer_id 
+            WHERE t.id =  " . $id;
 
             $resultset = mysqli_query($this->conn, $query);
 
@@ -199,9 +191,10 @@ class TaskModel extends Database
     {
         if ($id == 0) return null;
         else {
-            $query = "SELECT s.id, s.title, s.price FROM my_services s 
-            INNER JOIN my_orders o ON s.id=o.service_id 
-            INNER JOIN my_tasks t ON o.id=t.order_id  WHERE t.id = " . $id;
+            $query = "SELECT s.id, s.title, s.price 
+            FROM my_tasks t 
+            INNER JOIN my_customers c ON c.id = t.customer_id
+            INNER JOIN my_services s ON s.id = c.service_id where t.id = " . $id;
             $resultset = mysqli_query($this->conn, $query);
 
             if (mysqli_num_rows($resultset) > 0) {
