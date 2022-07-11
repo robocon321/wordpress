@@ -4,7 +4,7 @@
     public function getUsers($offset = null, $limit = null, $search = '', $sortby = null, $isASC = true, $conditions = []) {
       $query = "SELECT * FROM wp_users WHERE 1 ";
 
-      $query = " AND user_nicename LIKE '%".$search."%' ";
+      $query = $query." AND user_nicename LIKE '%".$search."%' ";
 
       if(isset($conditions)) {
         foreach ($conditions as $key => $value) {

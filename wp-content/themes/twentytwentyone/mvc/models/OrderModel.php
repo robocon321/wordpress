@@ -55,12 +55,13 @@ class OrderModel extends Database
   }
 
   public function getCountOrder($conditions) {
-    $query = "SELECT count(*) FROM my_orders WHERE 1 ";
+    $query = "SELECT count(*) count FROM my_customers WHERE 1 ";
     if(isset($conditions)) {
       foreach ($conditions as $key => $value) {
         $query = $query." AND ".$key."=".$value." ";
       }
     }
+
     return mysqli_query($this -> conn, $query);
   }
 

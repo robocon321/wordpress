@@ -9,9 +9,13 @@
           $data = [];
           $service = $this -> service("ServiceDetailAdminService");
           $data['service'] = $service -> getService($params['id']);
+          while($row = mysqli_fetch_array($data['service'])) {
+            $author_id = $row['author_id'];
+          }
+          mysqli_data_seek($data['service'], 0);
           $data['total-order'] = $service -> getTotalOrder($params['id']);
           $data['tags'] = $service -> getTags($params['id']);
-          $data['author'] = $service -> getAuthor($params['id']);
+          $data['author'] = $service -> getAuthor($author_id);
           
           $this -> view("service-detail-admin", $data);
         } else {
