@@ -348,7 +348,6 @@
             data: $(form).serialize(), // serializes the form's elements.
             success: function(data)
             {
-                console.log(data);
                 data = JSON.parse(data);
                 if(data.is_success) {
                     tbody.innerHTML = null;

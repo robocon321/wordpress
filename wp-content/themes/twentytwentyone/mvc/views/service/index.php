@@ -40,7 +40,7 @@ else $page = $_GET['pg'];
                     </div>
                     <div class="form-group">
                         <label for="phone">Số điện thoại</label>
-                        <input type="phone" class="form-control" value="<?php echo isset($customer['phone']) ? $customer['phone'] : '' ?>" id="phone" name="phone" />
+                        <input type="text" pattern="^([0-9]{10})" class="form-control" value="<?php echo isset($customer['phone']) ? $customer['phone'] : '' ?>" id="phone" name="phone" />
                     </div>
                     <div class="form-group ">
                         <label for="birthday">Ngày sinh</label>
