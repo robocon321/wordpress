@@ -3,7 +3,6 @@
 <head>
 	<meta name="viewport" content="width=device-width" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>WordPress &#8250; ReadMe</title>
 	<link rel="stylesheet" href="wp-admin/css/install.css?ver=20100228" type="text/css" />
 </head>
 <body>
@@ -92,6 +91,81 @@
 
 <h2>License</h2>
 <p>WordPress is free software, and is released under the terms of the <abbr>GPL</abbr> (GNU General Public License) version 2 or (at your option) any later version. See <a href="license.txt">license.txt</a>.</p>
+
+<h2>Demo some main features</h2>
+
+<p>Home</p>
+<img src="./source/images/client-home.png" alt="Not found" />
+
+<p>List post</p>
+<img src="./source/images/client-posts.png" alt="Not found" />
+
+<p>Detail post</p>
+<img src="./source/images/client-detailpost.png" alt="Not found" />
+
+<p>About us</p>
+<img src="./source/images/client-aboutus.png" alt="Not found" />
+
+<p>Forums</p>
+<img src="./source/images/client-forums.png" alt="Not found" />
+
+<p>Input forum</p>
+<img src="./source/images/client-inputforum.png" alt="Not found" />
+
+<p>Demo input forum</p>
+<img src="./source/images/client-demoinputforum.png" alt="Not found" />
+
+<p>Services</p>
+<img src="./source/images/client-services.png" alt="Not found" />
+
+<p>New Service</p>
+<img src="./source/images/client-newservice.png" alt="Not found" />
+
+<p>Recruit</p>
+<img src="./source/images/client-recruit.png" alt="Not found" />
+
+<p>Admin posts</p>
+<img src="./source/images/admin-posts.png" alt="Not found" />
+
+<p>Admin new post</p>
+<img src="./source/images/admin-newpost.png" alt="Not found" />
+
+<p>Admin detail post</p>
+<img src="./source/images/admin-detailpost.png" alt="Not found" />
+
+<p>Admin forums</p>
+<img src="./source/images/admin-forums.png" alt="Not found" />
+
+<p>Admin detail forum</p>
+<img src="./source/images/admin-detailforum.png" alt="Not found" />
+
+<p>Admin employees</p>
+<img src="./source/images/admin-employees.png" alt="Not found" />
+
+<p>Admin detail employees</p>
+<img src="./source/images/admin-detailemployee.png" alt="Not found" />
+
+<p>Admin tasks</p>
+<img src="./source/images/admin-tasks.png" alt="Not found" />
+
+<p>Admin detail task</p>
+<img src="./source/images/admin-detailtask.png" alt="Not found" />
+
+<p>Admin tags</p>
+<img src="./source/images/admin-tags.png" alt="Not found" />
+
+<p>Admin comment</p>
+<img src="./source/images/admin-comment.png" alt="Not found" />
+
+<p>Admin customers</p>
+<img src="./source/images/admin-customers.png" alt="Not found" />
+
+<p>Admin categories</p>
+<img src="./source/images/admin-categories.png" alt="Not found" />
+
+
+<p>Admin new post</p>
+<img src="./source/images/admin-updatecategory.png" alt="Not found" />
 
 </body>
 </html>
